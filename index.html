@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>山本卓立 | Takuto Yamamoto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@300;400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --crimson: #8b0000;
+      --crimson-light: #a51c1c;
+      --gold: #c9a84c;
+      --dark: #111;
+      --text: #2a2a2a;
+      --muted: #777;
+      --bg: #f7f4ef;
+      --white: #fff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Serif JP', serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      right: -40px;
+      top: 0;
+      width: 80px;
+      height: 100%;
+      background: var(--dark);
+      clip-path: polygon(0 0, 0 100%, 100% 100%);
+      z-index: 2;
+    }
+
+    .hero-accent {
+      width: 40px;
+      height: 3px;
+      background: var(--gold);
+      margin-bottom: 2rem;
+      animation: expand 1s ease forwards;
+    }
+
+    @keyframes expand {
+      from { width: 0; }
+      to { width: 40px; }
+    }
+
+    .hero-jp {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      color: var(--white);
+      letter-spacing: 0.15em;
+      line-height: 1.3;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s ease forwards;
+    }
+
+    .hero-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      color: var(--gold);
+      letter-spacing: 0.3em;
+      margin-top: 0.6rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s ease forwards;
+    }
+
+    .hero-divider {
+      width: 1px;
+      height: 3rem;
+      background: var(--muted);
+      margin: 2rem 0;
+      opacity: 0;
+      animation: fadeIn 0.8s 0.6s ease forwards;
+    }
+
+    .hero-affil {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 300;
+      font-size: 0.82rem;
+      color: #aaa;
+      line-height: 2;
+      letter-spacing: 0.08em;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s ease forwards;
+    }
+
+    .hero-affil span {
+      display: block;
+    }
+
+    .hero-right {
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 5rem 5rem 6rem;
+      position: relative;
+    }
+
+    .hero-right-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeIn 0.8s 0.9s ease forwards;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeUp 0.8s 1s ease forwards;
+    }
+
+    .hero-tagline strong {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--crimson);
+    }
+
+    .hero-nav {
+      position: absolute;
+      bottom: 3rem;
+      right: 5rem;
+      display: flex;
+      gap: 2rem;
+      opacity: 0;
+      animation: fadeIn 0.8s 1.2s ease forwards;
+    }
+
+    .hero-nav a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .hero-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--crimson);
+      transition: width 0.3s;
+    }
+
+    .hero-nav a:hover { color: var(--crimson); }
+    .hero-nav a:hover::after { width: 100%; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* ── Section Common ── */
+    section {
+      padding: 6rem 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      color: var(--dark);
+      margin-bottom: 3rem;
+      line-height: 1.2;
+    }
+
+    /* ── About ── */
+    #about { background: var(--white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-side-title {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      font-size: 3.5rem;
+      color: var(--bg);
+      -webkit-text-stroke: 1.5px #ddd;
+      line-height: 1;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .about-body p {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+
+    .about-body p:last-child { margin-bottom: 0; }
+
+    /* ── Research ── */
+    #research { background: var(--bg); }
+
+    .research-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 2rem;
+      border-top: 3px solid var(--crimson);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .card-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 0.8rem;
+    }
+
+    .card h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.7;
+      color: var(--dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .card p {
+      font-size: 0.84rem;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    /* ── Education ── */
+    #education { background: var(--dark); }
+
+    #education .section-label { color: var(--gold); }
+    #education .section-title { color: var(--white); }
+
+    .timeline {
+      border-left: 1px solid #333;
+      padding-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.4rem;
+      top: 0.4rem;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    .timeline-year {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-title {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.8;
+    }
+
+    .timeline-sub {
+      font-size: 0.82rem;
+      color: #888;
+      margin-top: 0.2rem;
+      line-height: 1.8;
+    }
+
+    /* ── Contact ── */
+    #contact { background: var(--bg); }
+
+    .contact-inner {
+      display: flex;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-info {
+      flex: 1;
+    }
+
+    .contact-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-item-value {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .contact-item-value a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid #ccc;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .contact-item-value a:hover {
+      color: var(--crimson);
+      border-color: var(--crimson);
+    }
+
+    .contact-note {
+      flex: 1;
+      background: var(--white);
+      padding: 2.5rem;
+      border-left: 3px solid var(--gold);
+    }
+
+    .contact-note p {
+      font-size: 0.88rem;
+      line-height: 2;
+      color: var(--muted);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--dark);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: #555;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-left {
+        padding: 4rem 2rem 3rem;
+      }
+
+      .hero-left::after { display: none; }
+
+      .hero-right {
+        padding: 3rem 2rem;
+      }
+
+      .hero-nav {
+        position: static;
+        margin-top: 2rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .about-side-title { display: none; }
+
+      .research-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-inner {
+        flex-direction: column;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-accent"></div>
+    <h1 class="hero-jp">山本 卓立</h1>
+    <p class="hero-en">Takuto Yamamoto</p>
+    <div class="hero-divider"></div>
+    <div class="hero-affil">
+      <span>早稲田大学大学院</span>
+      <span>会計研究科 会計専攻</span>
+      <span>専門職学位課程</span>
+      <span style="color: #666; font-size: 0.75rem; margin-top: 0.4rem;">会計修士（専門職）</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <p class="hero-right-label">Graduate Student</p>
+    <p class="hero-tagline">
+      会計という言語で<br>
+      <strong>ビジネスの本質</strong>を<br>
+      読み解く。
+    </p>
+    <nav class="hero-nav">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</section>
+
+<!-- ── About ── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-side-title">About</div>
+      <div class="about-body">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">自己紹介</h2>
+        <p>
+          早稲田大学大学院 会計研究科にて、会計・ファイナンスを専門に学んでいます。専門職学位課程において、高度な会計実務と理論の融合を目指した研究・学習に取り組んでいます。
+        </p>
+        <p>
+          企業会計、財務分析、監査などの分野に強い関心を持ち、実務に直結した知識と分析力の習得を目標としています。将来は会計専門家として、企業価値の創造に貢献していきたいと考えています。
+        </p>
+        <p>
+          Waseda Graduate School of Accountancy, pursuing a Master of Professional Accountancy. Focused on bridging rigorous accounting theory with practical business application.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Research / Interests ── -->
+<section id="research">
+  <div class="container">
+    <p class="section-label">Interests</p>
+    <h2 class="section-title">研究・関心領域</h2>
+    <div class="research-cards">
+      <div class="card">
+        <p class="card-tag">Financial Accounting</p>
+        <h3>財務会計・ディスクロージャー</h3>
+        <p>財務諸表の分析と情報開示のあり方、企業の透明性向上について研究しています。</p>
+      </div>
+      <div class="card">
+        <p class="card-tag">Auditing</p>
+        <h3>監査論</h3>
+        <p>会計監査の理論と実務、監査品質の向上に向けた制度設計に関心を持っています。</p>
+      </div>
+      <div class="card">
+        <p class="card-tag">Corporate Finance</p>
+        <h3>コーポレートファイナンス</h3>
+        <p>企業の資本構成・投資意思決定・バリュエーションに関する分析手法を学んでいます。</p>
+      </div>
+      <div class="card">
+        <p class="card-tag">Management Accounting</p>
+        <h3>管理会計</h3>
+        <p>経営意思決定を支援するための原価計算や業績評価システムを研究しています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Education ── -->
+<section id="education">
+  <div class="container">
+    <p class="section-label">Education</p>
+    <h2 class="section-title">学歴</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <p class="timeline-year">現在 — Present</p>
+        <p class="timeline-title">早稲田大学大学院 会計研究科 会計専攻</p>
+        <p class="timeline-sub">専門職学位課程 / Master of Professional Accountancy<br>Waseda Graduate School of Accountancy</p>
+      </div>
+      <div class="timeline-item">
+        <p class="timeline-year">学部 — Undergraduate</p>
+        <p class="timeline-title">学部課程（詳細はお問い合わせください）</p>
+        <p class="timeline-sub">Undergraduate Studies</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">お問い合わせ</h2>
+    <div class="contact-inner">
+      <div class="contact-info">
+        <div class="contact-item">
+          <p class="contact-item-label">Email</p>
+          <p class="contact-item-value">
+            <a href="mailto:example@waseda.jp">example@waseda.jp</a>
+          </p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-item-label">Institution</p>
+          <p class="contact-item-value">
+            早稲田大学大学院 会計研究科<br>
+            Waseda Graduate School of Accountancy
+          </p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-item-label">Location</p>
+          <p class="contact-item-value">東京都新宿区 / Tokyo, Japan</p>
+        </div>
+      </div>
+      <div class="contact-note">
+        <p>
+          研究・インターン・勉強会に関するご連絡、または会計・ファイナンス分野での情報交換はお気軽にご連絡ください。
+        </p>
+        <p style="margin-top: 1rem;">
+          Feel free to reach out for academic discussions, networking, or any inquiries related to accountancy and finance.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <p>&copy; 2025 Takuto Yamamoto &nbsp;|&nbsp; 山本 卓立 &nbsp;|&nbsp; Waseda Graduate School of Accountancy</p>
+</footer>
+
+</body>
+</html>
