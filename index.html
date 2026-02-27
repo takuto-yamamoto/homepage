@@ -3,637 +3,776 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>山本卓立 | Yamamoto Takuto</title>
+<title>山本卓立 | Yamamoto Takuto — 会計×ICT×データサイエンス</title>
+<meta name="description" content="山本卓立の個人サイト。早稲田大学大学院会計研究科。会計×ICT×データサイエンスで次世代の会計プロフェッショナルを目指す。">
+<meta property="og:title" content="山本卓立 | Accounting × ICT × Data Science">
+<meta property="og:description" content="早稲田大学大学院 会計研究科。会計士×アクチュアリーのダブルライセンスを目指す次世代型会計プロフェッショナル。">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0a1628;
-    --blue: #0067C0;
-    --blue-dark: #00509a;
-    --blue-light: #d0e6f8;
-    --white: #fafafa;
-    --off-white: #f4f4f0;
-    --gray: #8a8a8a;
-    --light-gray: #e5e5e1;
-    --text: #1a1a1a;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Noto Serif JP', serif;
-    background: var(--white);
-    color: var(--text);
-    line-height: 1.8;
-    overflow-x: hidden;
-  }
-
-  /* LANGUAGE TOGGLE */
-  .lang-toggle {
-    position: fixed;
-    top: 72px;
-    right: 32px;
-    z-index: 1000;
-    display: flex;
-    border: 1px solid var(--blue);
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,103,192,0.15);
-  }
-
-  .lang-btn {
-    padding: 5px 14px;
-    background: var(--white);
-    border: none;
-    cursor: pointer;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--blue);
-    transition: all 0.2s;
-  }
-
-  .lang-btn.active {
-    background: var(--blue);
-    color: var(--white);
-  }
-
-  .lang-btn:hover:not(.active) { background: var(--blue-light); }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 500;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    height: 56px;
-    background: rgba(10,22,40,0.97);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    transform: translateY(-100%);
-    transition: transform 0.3s ease;
-  }
-
-  nav.visible { transform: translateY(0); }
-
-  .nav-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    color: rgba(255,255,255,0.65);
-    letter-spacing: 0.2em;
-    flex: 1;
-  }
-
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.45);
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--white); }
-
-  /* HEADER */
-  header {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 5fr 7fr;
-    position: relative;
-  }
-
-  .header-left {
-    background: var(--navy);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 64px 52px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .header-left::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 39px,
-      rgba(255,255,255,0.025) 39px,
-      rgba(255,255,255,0.025) 40px
-    );
-    pointer-events: none;
-  }
-
-  .header-left::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 3px; height: 100%;
-    background: linear-gradient(to bottom, transparent 0%, var(--blue) 35%, var(--blue) 70%, transparent 100%);
-  }
-
-  .header-right {
-    background: var(--off-white);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 64px 56px;
-  }
-
-  .name-ja {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(26px, 3.5vw, 44px);
-    font-weight: 300;
-    color: var(--white);
-    letter-spacing: 0.22em;
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 1;
-    animation: fadeUp 0.8s ease forwards;
-  }
-
-  .name-en {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(13px, 1.6vw, 18px);
-    font-weight: 300;
-    color: rgba(255,255,255,0.45);
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 1;
-    animation: fadeUp 0.8s 0.1s ease both;
-  }
-
-  .header-divider {
-    width: 36px; height: 1px;
-    background: var(--blue);
-    margin: 28px 0;
-    position: relative; z-index: 1;
-    animation: expand 0.8s 0.3s ease both;
-  }
-
-  @keyframes expand { from { width: 0; } to { width: 36px; } }
-
-  .header-tagline {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(11px, 1.3vw, 14px);
-    font-weight: 300;
-    color: rgba(255,255,255,0.65);
-    line-height: 2;
-    position: relative; z-index: 1;
-    animation: fadeUp 0.8s 0.4s ease both;
-  }
-
-  .theme-text {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(15px, 1.8vw, 20px);
-    font-weight: 400;
-    color: var(--navy);
-    line-height: 1.9;
-    margin-bottom: 32px;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
-
-  .keywords {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    animation: fadeUp 0.8s 0.4s ease both;
-  }
-
-  .keyword {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    color: var(--blue);
-    border: 1px solid var(--blue);
-    padding: 3px 10px;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* SECTIONS */
-  .section { padding: 72px 0; }
-
-  .section-inner {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 52px;
-  }
-
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1; height: 1px;
-    background: var(--light-gray);
-    max-width: 180px;
-  }
-
-  .section-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(20px, 2.5vw, 28px);
-    font-weight: 400;
-    color: var(--navy);
-    margin-bottom: 36px;
-    letter-spacing: 0.04em;
-  }
-
-  /* VISION */
-  .vision-section {
-    background: var(--navy);
-    padding: 72px 0;
-  }
-
-  .vision-section .section-title { color: var(--white); }
-  .vision-section .section-label { color: rgba(255,255,255,0.35); }
-  .vision-section .section-label::after { background: rgba(255,255,255,0.08); }
-
-  .pillars {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-  }
-
-  .pillar {
-    background: rgba(255,255,255,0.03);
-    padding: 32px 28px;
-    border-top: 2px solid transparent;
-    transition: border-color 0.25s, background 0.25s;
-    cursor: default;
-  }
-
-  .pillar:hover {
-    border-color: var(--blue);
-    background: rgba(0,103,192,0.1);
-  }
-
-  .pillar-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 44px;
-    color: rgba(255,255,255,0.05);
-    font-weight: 300;
-    line-height: 1;
-    margin-bottom: 16px;
-  }
-
-  .pillar-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 14px;
-    color: var(--white);
-    margin-bottom: 14px;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    line-height: 1.7;
-  }
-
-  .pillar-body {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 12px;
-    color: rgba(255,255,255,0.48);
-    line-height: 1.9;
-    font-weight: 300;
-  }
-
-  /* RESEARCH */
-  .research-card {
-    border: 1px solid var(--light-gray);
-    padding: 36px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .research-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--blue);
-  }
-
-  .research-meta {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--gray);
-    letter-spacing: 0.1em;
-    margin-bottom: 14px;
-  }
-
-  .research-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 15px;
-    color: var(--navy);
-    margin-bottom: 16px;
-    line-height: 1.8;
-    font-weight: 500;
-  }
-
-  .research-summary {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 13px;
-    color: #555;
-    line-height: 2;
-    font-weight: 300;
-  }
-
-  .research-quote {
-    margin-top: 20px;
-    padding: 16px 20px;
-    background: var(--off-white);
-    border-left: 2px solid var(--blue);
-    font-family: 'Noto Serif JP', serif;
-    font-size: 13px;
-    color: var(--navy);
-    font-style: italic;
-    line-height: 1.9;
-  }
-
-  /* PROFILE */
-  .profile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 52px;
-  }
-
-  .timeline-item {
-    display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 20px;
-    margin-bottom: 24px;
-  }
-
-  .timeline-year {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--blue);
-    letter-spacing: 0.04em;
-    padding-top: 2px;
-    text-align: right;
-  }
-
-  .timeline-content {
-    border-left: 1px solid var(--light-gray);
-    padding-left: 20px;
-    padding-bottom: 20px;
-    position: relative;
-  }
-
-  .timeline-content::before {
-    content: '';
-    position: absolute;
-    left: -4px; top: 7px;
-    width: 7px; height: 7px;
-    background: var(--blue);
-    border-radius: 50%;
-  }
-
-  .timeline-school {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 13px;
-    color: var(--navy);
-    font-weight: 400;
-    line-height: 1.7;
-  }
-
-  .interests h3 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 13px;
-    color: var(--navy);
-    margin-bottom: 10px;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-  }
-
-  .interest-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 20px;
-  }
-
-  .interest-tag {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 11px;
-    padding: 4px 11px;
-    border: 1px solid var(--light-gray);
-    color: var(--text);
-    font-weight: 300;
-    transition: all 0.2s;
-    cursor: default;
-  }
-
-  .interest-tag:hover { border-color: var(--blue); color: var(--blue); }
-
-  .vision-note {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 12px;
-    color: #555;
-    line-height: 2;
-    font-weight: 300;
-  }
-
-  /* CONTACT */
-  .contact-section {
-    background: var(--off-white);
-    padding: 64px 0;
-    text-align: center;
-  }
-
-  .contact-section .section-label { justify-content: center; margin-bottom: 20px; }
-  .contact-section .section-label::after { display: none; }
-
-  .contact-email {
-    font-family: 'DM Mono', monospace;
-    font-size: clamp(13px, 1.8vw, 17px);
-    color: var(--blue);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    display: block;
-    margin: 0 0 12px;
-    transition: color 0.2s;
-  }
-
-  .contact-email:hover { color: var(--navy); }
-
-  .contact-note {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 12px;
-    color: var(--gray);
-    font-weight: 300;
-  }
-
-  /* PRIVACY */
-  .privacy-section { padding: 40px 0; border-top: 1px solid var(--light-gray); }
-
-  .privacy-inner {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 52px;
-  }
-
-  details { border: 1px solid var(--light-gray); }
-
-  summary {
-    padding: 14px 20px;
-    cursor: pointer;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: var(--gray);
-    text-transform: uppercase;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    user-select: none;
-  }
-
-  summary::before {
-    content: '+';
-    font-size: 13px;
-    color: var(--blue);
-    transition: transform 0.2s;
-    display: inline-block;
-  }
-
-  details[open] summary::before { transform: rotate(45deg); }
-
-  .privacy-body {
-    padding: 20px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 12px;
-    color: var(--gray);
-    line-height: 2;
-    font-weight: 300;
-    border-top: 1px solid var(--light-gray);
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 24px 52px;
-    background: var(--navy);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.22em;
-  }
-
-  .footer-copy {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: rgba(255,255,255,0.2);
-    letter-spacing: 0.08em;
-  }
-
-  /* LANGUAGE */
-  .ja { }
-  .en { display: none; }
-
-  body.en .ja { display: none !important; }
-  body.en .en { display: inline !important; }
-  body.en .en-block { display: block !important; }
-
-  /* EN font overrides */
-  body.en .theme-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2.2vw, 26px); }
-  body.en .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 2.8vw, 34px); letter-spacing: 0.02em; }
-  body.en .pillar-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; }
-  body.en .pillar-body { font-family: 'Georgia', serif; font-size: 13px; }
-  body.en .research-title { font-family: 'Cormorant Garamond', serif; font-size: 19px; }
-  body.en .research-summary { font-family: 'Georgia', serif; font-size: 14px; }
-  body.en .research-quote { font-family: 'Cormorant Garamond', serif; font-size: 16px; }
-  body.en .timeline-school { font-family: 'Georgia', serif; }
-  body.en .interests h3 { font-family: 'Cormorant Garamond', serif; font-size: 17px; }
-  body.en .interest-tag { font-family: 'DM Mono', monospace; letter-spacing: 0.05em; }
-  body.en .vision-note { font-family: 'Georgia', serif; font-size: 13px; }
-  body.en .contact-note { font-family: 'Georgia', serif; font-size: 13px; }
-  body.en .privacy-body { font-family: 'Georgia', serif; }
-
-  /* SCROLL ANIMATION */
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* RESPONSIVE */
-  @media (max-width: 800px) {
-    header { grid-template-columns: 1fr; min-height: auto; }
-    .header-left { padding: 72px 32px 36px; min-height: 55vh; }
-    .header-right { padding: 36px 32px 52px; }
-    .pillars { grid-template-columns: 1fr; }
-    .profile-grid { grid-template-columns: 1fr; gap: 36px; }
-    .section-inner { padding: 0 32px; }
-    .privacy-inner { padding: 0 32px; }
-    .lang-toggle { right: 16px; top: 64px; }
-    nav { padding: 0 16px; }
-    footer { flex-direction: column; gap: 6px; padding: 20px; text-align: center; }
-  }
+/* ─── TOKENS ─── */
+:root {
+  --navy:      #0a1628;
+  --blue:      #0067C0;
+  --blue-mid:  #1a7fd4;
+  --blue-lt:   #d0e6f8;
+  --blue-pale: #eaf3fc;
+  --white:     #fafafa;
+  --offwhite:  #f5f5f1;
+  --g4:        #444;
+  --g6:        #666;
+  --g9:        #999;
+  --gd:        #ddd;
+  --ge:        #e8e8e4;
+  --text:      #1c1c1c;
+}
+
+/* ─── RESET ─── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Serif JP', serif;
+  background: var(--white);
+  color: var(--text);
+  line-height: 1.85;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── LANGUAGE ─── */
+.en { display: none; }
+body.en .ja { display: none !important; }
+body.en .en { display: inline !important; }
+body.en .en-blk { display: block !important; }
+
+/* ─── LANG TOGGLE ─── */
+.lang-toggle {
+  position: fixed;
+  top: 68px; right: 28px;
+  z-index: 600;
+  display: flex;
+  border: 1.5px solid var(--blue);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,103,192,0.18);
+}
+.lang-btn {
+  padding: 7px 16px;
+  background: var(--white);
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--blue);
+  transition: background 0.2s, color 0.2s;
+}
+.lang-btn.active { background: var(--blue); color: var(--white); }
+.lang-btn:hover:not(.active) { background: var(--blue-pale); }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  height: 56px;
+  padding: 0 36px;
+  display: flex;
+  align-items: center;
+  background: rgba(10,22,40,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+nav.visible { transform: translateY(0); }
+.nav-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.2em;
+  flex: 1;
+}
+.nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+
+/* ─── HEADER ─── */
+header {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 42fr 58fr;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  will-change: opacity, transform;
+}
+.hdr-left {
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 72px 52px 64px;
+  position: relative;
+  overflow: hidden;
+  will-change: opacity, transform;
+}
+.hdr-left::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.022) 39px, rgba(255,255,255,0.022) 40px);
+  pointer-events: none;
+}
+.hdr-left::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(to bottom, transparent 0%, var(--blue) 30%, var(--blue) 72%, transparent 100%);
+  z-index: 2;
+}
+.hdr-right {
+  background: var(--offwhite);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 72px 60px 64px;
+  will-change: opacity, transform;
+}
+
+.name-ja {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(26px, 4vw, 48px);
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: 0.22em;
+  margin-bottom: 8px;
+  position: relative; z-index: 1;
+  animation: fadeUp 0.8s ease forwards;
+}
+.name-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(13px, 1.6vw, 19px);
+  font-weight: 300;
+  color: rgba(255,255,255,0.42);
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  position: relative; z-index: 1;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+.hdr-line {
+  width: 36px; height: 1px;
+  background: var(--blue);
+  margin: 28px 0;
+  position: relative; z-index: 1;
+  animation: widen 0.9s 0.25s ease both;
+}
+@keyframes widen { from { width: 0; } to { width: 36px; } }
+.hdr-tagline {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(12px, 1.4vw, 15px);
+  font-weight: 300;
+  color: rgba(255,255,255,0.62);
+  line-height: 2;
+  position: relative; z-index: 1;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+
+.value-hook {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 400;
+  color: var(--blue);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+.theme-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(18px, 2.2vw, 26px);
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.75;
+  margin-bottom: 20px;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+body.en .theme-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(19px, 2.4vw, 28px); }
+.hdr-desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--g6);
+  line-height: 1.9;
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+body.en .hdr-desc { font-family: 'Georgia', serif; font-size: 15px; }
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+.keyword {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  color: var(--blue);
+  border: 1.5px solid var(--blue);
+  padding: 4px 12px;
+  border-radius: 2px;
+}
+
+/* audience nav */
+.audience-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.5s ease both;
+}
+.audience-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--navy);
+  text-decoration: none;
+  padding: 9px 16px;
+  background: var(--white);
+  border: 1px solid var(--gd);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.audience-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
+body.en .audience-btn { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.04em; }
+.btn-icon { width: 17px; height: 17px; flex-shrink: 0; color: var(--blue); opacity: 0.8; transition: opacity 0.2s; }
+.audience-btn:hover .btn-icon { opacity: 1; }
+.btn-arrow { width: 10px; height: 10px; flex-shrink: 0; color: var(--blue); margin-left: auto; opacity: 0.6; transition: transform 0.2s, opacity 0.2s; }
+.audience-btn:hover .btn-arrow { transform: translateY(2px); opacity: 1; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ─── SECTIONS ─── */
+.section { padding: 80px 0; }
+.section-inner { max-width: 980px; margin: 0 auto; padding: 0 52px; }
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--ge); max-width: 200px; }
+.section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+body.en .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 3vw, 38px); }
+.section-sub {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--g6);
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+body.en .section-sub { font-family: 'Georgia', serif; font-size: 16px; }
+
+/* ─── VISION ─── */
+.vision-section { background: var(--navy); padding: 80px 0; }
+.vision-section .section-title { color: var(--white); }
+.vision-section .section-label { color: rgba(255,255,255,0.35); }
+.vision-section .section-label::after { background: rgba(255,255,255,0.1); }
+.vision-section .section-sub { color: rgba(255,255,255,0.6); }
+
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.pillar {
+  background: rgba(255,255,255,0.04);
+  padding: 36px 30px 32px;
+  border-top: 3px solid transparent;
+  transition: border-color 0.25s, background 0.25s;
+  cursor: default;
+}
+.pillar:hover { border-color: var(--blue); background: rgba(0,103,192,0.1); }
+.pillar-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 18px;
+  color: var(--blue);
+  opacity: 0.6;
+}
+.pillar-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 16px;
+  color: var(--white);
+  margin-bottom: 14px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.65;
+}
+body.en .pillar-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; }
+.pillar-body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.9;
+  font-weight: 300;
+}
+body.en .pillar-body { font-family: 'Georgia', serif; }
+.pillar-detail {
+  margin-top: 14px;
+  display: none;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.9;
+  font-weight: 300;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 12px;
+}
+body.en .pillar-detail { font-family: 'Georgia', serif; }
+.pillar:hover .pillar-detail { display: block; }
+
+/* ─── RESEARCH ─── */
+.research-card {
+  border: 1px solid var(--ge);
+  padding: 36px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.research-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--blue);
+}
+.research-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--g9); letter-spacing: 0.1em; margin-bottom: 14px; }
+.res-title { font-family: 'Noto Serif JP', serif; font-size: 18px; color: var(--navy); margin-bottom: 18px; line-height: 1.75; font-weight: 500; }
+body.en .res-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; }
+.res-summary-short {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  color: var(--g4);
+  line-height: 1.9;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+body.en .res-summary-short { font-family: 'Georgia', serif; }
+.res-detail { display: none; }
+.res-detail.open { display: block; }
+.res-detail-body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  color: var(--g6);
+  line-height: 1.95;
+  font-weight: 300;
+  margin-bottom: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--ge);
+}
+body.en .res-detail-body { font-family: 'Georgia', serif; font-size: 15px; }
+.toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+  margin-bottom: 16px;
+}
+.toggle-btn:hover { opacity: 0.7; }
+.toggle-icon { font-size: 14px; transition: transform 0.2s; display: inline-block; }
+.toggle-btn.open .toggle-icon { transform: rotate(45deg); }
+.res-quote {
+  margin-top: 18px;
+  padding: 16px 20px;
+  background: var(--blue-pale);
+  border-left: 3px solid var(--blue);
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  color: var(--navy);
+  font-style: italic;
+  line-height: 1.9;
+}
+body.en .res-quote { font-family: 'Cormorant Garamond', serif; font-size: 17px; }
+
+/* ─── PROFILE ─── */
+.profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.col-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--blue);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ge);
+}
+.tl-item { display: grid; grid-template-columns: 68px 1fr; gap: 18px; margin-bottom: 20px; }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--blue); letter-spacing: 0.04em; padding-top: 3px; text-align: right; line-height: 1.5; }
+.tl-content {
+  border-left: 1px solid var(--ge);
+  padding-left: 18px;
+  padding-bottom: 18px;
+  position: relative;
+}
+.tl-content::before {
+  content: '';
+  position: absolute;
+  left: -4.5px; top: 8px;
+  width: 8px; height: 8px;
+  background: var(--blue);
+  border-radius: 50%;
+}
+.tl-school { font-family: 'Noto Sans JP', sans-serif; font-size: 16px; color: var(--navy); font-weight: 400; line-height: 1.7; }
+body.en .tl-school { font-family: 'Georgia', serif; }
+.tl-note { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; color: var(--g9); font-weight: 300; margin-top: 3px; }
+body.en .tl-note { font-family: 'Georgia', serif; }
+
+.interests h3 { font-family: 'Noto Serif JP', serif; font-size: 15px; color: var(--navy); margin-bottom: 12px; margin-top: 20px; font-weight: 400; }
+.interests h3:first-of-type { margin-top: 0; }
+body.en .interests h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; }
+.tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+.tag {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  padding: 5px 13px;
+  border: 1px solid var(--ge);
+  color: var(--g4);
+  font-weight: 300;
+  border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s;
+  cursor: default;
+}
+body.en .tag { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.04em; }
+.tag:hover { border-color: var(--blue); color: var(--blue); }
+
+/* professional vision block */
+.vision-block {
+  position: relative;
+  margin-top: 10px;
+  padding: 22px 24px 22px 58px;
+  background: linear-gradient(135deg, var(--navy) 0%, #0b2244 100%);
+  overflow: hidden;
+}
+.vision-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: linear-gradient(to bottom, var(--blue), var(--blue-mid));
+}
+.vision-block::after {
+  content: '\201C';
+  position: absolute;
+  left: 14px; top: 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 56px;
+  color: var(--blue);
+  opacity: 0.45;
+  line-height: 1;
+  font-style: italic;
+}
+.vision-block-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  color: var(--white);
+  line-height: 1.95;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+body.en .vision-block-text { font-family: 'Cormorant Garamond', serif; font-size: 18px; }
+.vision-block-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--blue-mid);
+  text-transform: uppercase;
+  margin-top: 12px;
+  display: block;
+}
+
+/* ─── CONTACT ─── */
+.contact-section { background: var(--navy); padding: 72px 0; text-align: center; }
+.contact-section .section-label { justify-content: center; color: rgba(255,255,255,0.55); margin-bottom: 24px; }
+.contact-section .section-label::after { display: none; }
+.contact-email {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(15px, 2vw, 20px);
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  display: inline-block;
+  margin-bottom: 14px;
+  border-bottom: 1.5px solid rgba(0,103,192,0.55);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.contact-email:hover { color: var(--blue-lt); border-bottom-color: var(--blue-lt); }
+.contact-note {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+}
+body.en .contact-note { font-family: 'Georgia', serif; }
+
+/* ─── PRIVACY ─── */
+.privacy-section { padding: 40px 0; border-top: 1px solid var(--ge); background: var(--offwhite); }
+.privacy-inner { max-width: 720px; margin: 0 auto; padding: 0 52px; }
+details { border: 1px solid var(--ge); background: var(--white); }
+summary {
+  padding: 14px 20px;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--g9);
+  text-transform: uppercase;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: '+'; font-size: 14px; color: var(--blue); transition: transform 0.2s; display: inline-block; line-height: 1; }
+details[open] summary::before { transform: rotate(45deg); }
+.privacy-body { padding: 20px 24px; font-family: 'Noto Sans JP', sans-serif; font-size: 12px; color: var(--g9); line-height: 2; font-weight: 300; border-top: 1px solid var(--ge); }
+body.en .privacy-body { font-family: 'Georgia', serif; }
+
+/* ─── FOOTER ─── */
+footer { padding: 24px 52px; background: var(--navy); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); }
+.footer-name { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: rgba(255,255,255,0.3); letter-spacing: 0.22em; }
+.footer-copy { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.18); letter-spacing: 0.08em; }
+
+/* ─── HERO SCROLL FADE ─── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* All content after header sits above it via stacking context */
+main-content-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── PROFESSIONAL VISION (full-width) ─── */
+.prof-vision-section {
+  background: var(--navy);
+  padding: 96px 0 104px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle grid texture matching header-left */
+.prof-vision-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent, transparent 39px,
+    rgba(255,255,255,0.018) 39px, rgba(255,255,255,0.018) 40px
+  );
+  pointer-events: none;
+}
+
+/* blue horizontal accent lines top & bottom */
+.prof-vision-section::after {
+  content: '';
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  top: 0;
+  width: 60px; height: 3px;
+  background: var(--blue);
+}
+
+.prof-vision-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.prof-vision-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 36px;
+  opacity: 0.9;
+}
+
+.prof-vision-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 100px;
+  color: var(--blue);
+  opacity: 0.2;
+  line-height: 0.6;
+  margin-bottom: 24px;
+  font-style: italic;
+  user-select: none;
+}
+
+.prof-vision-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(20px, 3vw, 34px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.85;
+  letter-spacing: 0.04em;
+}
+
+body.en .prof-vision-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 3.5vw, 42px);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+.prof-vision-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.22em;
+  margin-top: 40px;
+  font-style: normal;
+}
+
+.prof-vision-dash {
+  color: var(--blue);
+  margin-right: 8px;
+}
+
+@media (max-width: 800px) {
+  .prof-vision-section { padding: 72px 0 80px; }
+  .prof-vision-inner { padding: 0 28px; }
+  .prof-vision-quote { font-size: 72px; }
+}
+
+/* ─── STACKING: page body slides over sticky header ─── */
+#page-body {
+  position: relative;
+  z-index: 2;
+  background: var(--white);
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.18);
+}
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── MOBILE ─── */
+@media (max-width: 800px) {
+  header { grid-template-columns: 1fr; min-height: auto; }
+  .hdr-left { padding: 80px 28px 40px; min-height: 50vh; }
+  .hdr-right { padding: 40px 28px 56px; }
+  .pillars { grid-template-columns: 1fr; }
+  .pillar { padding: 28px 24px; }
+  .pillar-detail { display: block; }
+  .profile-grid { grid-template-columns: 1fr; gap: 36px; }
+  .section-inner { padding: 0 24px; }
+  .privacy-inner { padding: 0 24px; }
+  .section { padding: 56px 0; }
+  .lang-toggle { top: 62px; right: 16px; }
+  nav { padding: 0 20px; }
+  .nav-links { gap: 16px; }
+  footer { flex-direction: column; gap: 8px; padding: 20px 24px; text-align: center; }
+  .audience-nav { flex-direction: column; }
+  .research-card { padding: 24px 20px; }
+  .res-detail { display: block; }
+  .toggle-btn { display: none; }
+}
+@media (max-width: 480px) {
+  .hdr-left { padding: 72px 20px 36px; }
+  .hdr-right { padding: 32px 20px 48px; }
+  .section-inner { padding: 0 20px; }
+  .privacy-inner { padding: 0 20px; }
+  footer { padding: 20px; }
+}
 </style>
 </head>
 <body>
 
-<!-- Language Toggle -->
+<!-- LANG TOGGLE -->
 <div class="lang-toggle">
   <button class="lang-btn active" onclick="setLang('ja')">JA</button>
   <button class="lang-btn" onclick="setLang('en')">EN</button>
 </div>
 
-<!-- Sticky Nav -->
+<!-- NAV -->
 <nav id="nav">
   <span class="nav-name">Yamamoto Takuto</span>
   <ul class="nav-links">
-    <li><a href="#vision"><span class="ja">ビジョン</span><span class="en" style="display:none">Vision</span></a></li>
-    <li><a href="#research"><span class="ja">研究</span><span class="en" style="display:none">Research</span></a></li>
-    <li><a href="#profile"><span class="ja">プロフィール</span><span class="en" style="display:none">Profile</span></a></li>
+    <li><a href="#vision"><span class="ja">ビジョン</span><span class="en">Vision</span></a></li>
+    <li><a href="#research"><span class="ja">研究</span><span class="en">Research</span></a></li>
+    <li><a href="#profile"><span class="ja">プロフィール</span><span class="en">Profile</span></a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
-<!-- HEADER -->
-<header>
-  <div class="header-left">
+<!-- HERO -->
+<header id="top">
+  <div class="hdr-left">
     <div class="name-ja">山本 卓立</div>
     <div class="name-en">YAMAMOTO TAKUTO</div>
-    <div class="header-divider"></div>
-    <div class="header-tagline">
+    <div class="hdr-line"></div>
+    <div class="hdr-tagline">
       <span class="ja">早稲田大学大学院 会計研究科<br>会計修士（専門職） 1年</span>
       <span class="en">Master of Professional Accountancy, Year 1<br>Waseda University Graduate School of Accountancy</span>
     </div>
   </div>
-  <div class="header-right">
+
+  <div class="hdr-right">
+    <div class="value-hook">
+      <span class="ja">Accounting × ICT × Data Science</span>
+      <span class="en">Accounting × ICT × Data Science</span>
+    </div>
     <div class="theme-text">
-      <span class="ja">会計 × ICT × データサイエンス<br>ダブルライセンスで挑む<br>次世代型会計プロフェッショナル</span>
-      <span class="en">Accounting × ICT × Data Science<br>The Next-Generation Accounting Professional,<br>Pursuing Dual Licensure</span>
+      <span class="ja">次世代型会計プロフェッショナルへ。<br>ダブルライセンスで意思決定を支える。</span>
+      <span class="en">Toward the Next-Generation<br>Accounting Professional —<br>Dual Licensure for Better Decisions.</span>
+    </div>
+    <div class="hdr-desc">
+      <span class="ja">公認会計士×アクチュアリーの資格取得を視野に、テクノロジーとデータで会計の専門性を拡張する。</span>
+      <span class="en">Pursuing dual credentials as CPA and Actuary, expanding accounting expertise through technology and data science.</span>
     </div>
     <div class="keywords">
       <span class="keyword">Accounting</span>
@@ -642,10 +781,47 @@
       <span class="keyword">CPA Candidate</span>
       <span class="keyword">Actuary Track</span>
     </div>
+    <div class="audience-nav">
+      <!-- Vision btn -->
+      <a href="#vision" class="audience-btn">
+        <svg class="btn-icon" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="10" cy="10" r="4.5" stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="10" cy="10" r="1.5" fill="currentColor"/>
+        </svg>
+        <span class="ja">ビジョン・研究方針</span><span class="en">Vision &amp; Research</span>
+        <svg class="btn-arrow" viewBox="0 0 12 12" fill="none">
+          <path d="M6 2v8M2.5 7l3.5 3 3.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <!-- Profile btn -->
+      <a href="#profile" class="audience-btn">
+        <svg class="btn-icon" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M3 17.5c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <span class="ja">経歴・スキル</span><span class="en">Background &amp; Skills</span>
+        <svg class="btn-arrow" viewBox="0 0 12 12" fill="none">
+          <path d="M6 2v8M2.5 7l3.5 3 3.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <!-- Contact btn -->
+      <a href="#contact" class="audience-btn">
+        <svg class="btn-icon" viewBox="0 0 20 20" fill="none">
+          <rect x="2" y="4.5" width="16" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M2 6.5l8 5.5 8-5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="ja">連絡する</span><span class="en">Get in Touch</span>
+        <svg class="btn-arrow" viewBox="0 0 12 12" fill="none">
+          <path d="M6 2v8M2.5 7l3.5 3 3.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
   </div>
 </header>
 
 <!-- VISION -->
+<div id="page-body">
 <section class="vision-section" id="vision">
   <div class="section-inner">
     <div class="section-label">Vision</div>
@@ -653,7 +829,10 @@
       <span class="ja">大学院で成し遂げたいこと</span>
       <span class="en">What I Aim to Achieve in Graduate School</span>
     </div>
-
+    <div class="section-sub reveal">
+      <span class="ja">会計を軸に、ICTとデータで意思決定を支える専門性を構築する。3つの柱に集約した行動指針。</span>
+      <span class="en">Building expertise that supports decision-making through accounting, ICT, and data — three core pillars.</span>
+    </div>
     <div class="pillars">
       <div class="pillar reveal">
         <div class="pillar-num">01</div>
@@ -662,30 +841,42 @@
           <span class="en">Innovating Accounting Through Technology</span>
         </div>
         <div class="pillar-body">
-          <span class="ja">ICTの進化が監査・会計実務に与える影響を深く研究する。画像認識技術等を活用した不正検出や業務の高度な自動化を構想し、実務に直結するイノベーションを探求する。</span>
-          <span class="en">Researching how ICT evolution reshapes audit and accounting practice. I envision applying image recognition and AI to detect fraud and automate financial workflows — practical innovations at the intersection of technology and professional accounting.</span>
+          <span class="ja">ICTの進化が監査・会計実務に与える影響を研究し、実務直結のイノベーションを探求する。</span>
+          <span class="en">Researching how ICT reshapes audit and accounting, exploring practical innovations for the profession.</span>
+        </div>
+        <div class="pillar-detail">
+          <span class="ja">画像認識技術等を活用した不正検出や業務自動化を構想。会計的知見と外部の技術的知識を融合させた高付加価値なソリューションを目指す。</span>
+          <span class="en">Envisioning fraud detection via image recognition and workflow automation — merging accounting judgment with technical knowledge for high-value solutions.</span>
         </div>
       </div>
       <div class="pillar reveal">
         <div class="pillar-num">02</div>
         <div class="pillar-title">
-          <span class="ja">データ駆動型アプローチ &amp; ダブルライセンス</span>
-          <span class="en">Data-Driven Expertise &amp; Dual Licensure</span>
+          <span class="ja">データ駆動型アプローチ × ダブルライセンス</span>
+          <span class="en">Data-Driven Expertise × Dual Licensure</span>
         </div>
         <div class="pillar-body">
-          <span class="ja">学部での統計分析経験を活かしビジネスアナリティクスを深化させる。会計専門コースに身を置きつつアクチュアリー科目にも挑戦し、「会計士×アクチュアリー」のダブルライセンス取得を目指す。</span>
-          <span class="en">Building on undergraduate statistical work to deepen business analytics capabilities. While grounded in the accounting curriculum, I am pursuing actuarial coursework — targeting dual credentials as a CPA and Actuary, combining financial reporting and quantitative risk expertise.</span>
+          <span class="ja">学部の統計分析経験を活かし、ビジネスアナリティクスを深化させる。</span>
+          <span class="en">Deepening business analytics capabilities built on undergraduate statistical research.</span>
+        </div>
+        <div class="pillar-detail">
+          <span class="ja">会計専門コースに身を置きつつアクチュアリー科目にも挑戦。「会計士×アクチュアリー」のダブルライセンスで、財務報告とリスク定量化の両輪を担える人材を目指す。</span>
+          <span class="en">While completing the accounting curriculum, pursuing actuarial coursework — targeting dual credentials as CPA and Actuary, mastering financial reporting and quantitative risk assessment.</span>
         </div>
       </div>
       <div class="pillar reveal">
         <div class="pillar-num">03</div>
         <div class="pillar-title">
-          <span class="ja">公認会計士試験合格 &amp; 実践力の養成</span>
-          <span class="en">CPA Exam Success &amp; Applied Competence</span>
+          <span class="ja">公認会計士試験合格 × 実践力の養成</span>
+          <span class="en">CPA Exam Success × Applied Competence</span>
         </div>
         <div class="pillar-body">
-          <span class="ja">在学中の論文式試験合格を最優先とする。単なる試験対策に留まらず、大学院での理論的学びと実践的研究を有機的に結びつけることで、実務に即応できる高度な応用力を養う。</span>
-          <span class="en">Passing the CPA board exam (written portion) during graduate study is my primary goal. Beyond exam preparation, I aim to organically link theoretical research with practical learning — building the applied judgment that real-world professional work demands.</span>
+          <span class="ja">在学中の論文式試験合格を最優先とし、理論と実践の有機的な統合を図る。</span>
+          <span class="en">Prioritizing CPA board exam success, organically linking theory and practice.</span>
+        </div>
+        <div class="pillar-detail">
+          <span class="ja">単なる試験対策に留まらず、大学院での理論研究と実践的学びを結びつけることで、実務に即応できる高度な応用力を養う。試験合格はスタートライン。</span>
+          <span class="en">Going beyond exam prep — connecting graduate research with practical learning to develop advanced professional judgment. Passing the exam is only the starting line.</span>
         </div>
       </div>
     </div>
@@ -700,18 +891,31 @@
       <span class="ja">学部での研究</span>
       <span class="en">Undergraduate Research</span>
     </div>
-
+    <div class="section-sub reveal">
+      <span class="ja">データと統計で社会現象を計量化する手法を習得した原点。</span>
+      <span class="en">Where I developed the quantitative approach that now drives my work in accounting and data science.</span>
+    </div>
     <div class="research-card reveal">
-      <div class="research-meta">2022–2026 &nbsp;／&nbsp; Waseda University, Faculty of Human Sciences</div>
-      <div class="research-title">
-        <span class="ja">学校外教育費支出の規定要因<br>― 中学生の学校外教育費に対する保護者要因の統計的検証 ―</span>
-        <span class="en">Determinants of Out-of-School Education Expenditure<br>― A Statistical Examination of Parental Factors for Middle School Students ―</span>
+      <div class="research-meta">2022–2026 &ensp;／&ensp; Waseda University, Faculty of Human Sciences</div>
+      <div class="res-title">
+        <span class="ja">学校外教育費支出の規定要因<br>― 中学生の塾代に対する保護者要因の統計的検証 ―</span>
+        <span class="en">Determinants of Out-of-School Education Expenditure<br>― A Statistical Examination of Parental Factors ―</span>
       </div>
-      <div class="research-summary">
-        <span class="ja">SSM調査2015年データ（688世帯）を用いた重回帰分析により、学校外教育費の格差構造を解明。世帯年収・親の学歴が主要因であり、保護者の「教育への熱意」や「自身の通塾経験」も独立した押し上げ要因として機能することを検証した。教育格差の是正には経済支援に加え、保護者間の情報格差解消と地域特性を踏まえた多角的施策が必要であることを提言した。</span>
-        <span class="en">Using SSM Survey 2015 data (688 households) and multiple regression analysis, this study examined structural inequality in private tutoring expenditure. Household income and parental education emerged as the dominant predictors. Notably, parental "enthusiasm for education" and personal tutoring experience had independent positive effects beyond income and credentials. The study recommends multi-pronged policy — addressing not only economic barriers but also information gaps among parents and regional disparities in educational resources.</span>
+      <div class="res-summary-short">
+        <span class="ja">SSM調査2015年データ（688世帯）を用いた重回帰分析により、塾代格差の構造的要因を解明。世帯年収・親の学歴に加え、保護者の「教育熱意」や「通塾経験」が独立した影響を持つことを統計的に検証した。</span>
+        <span class="en">Using SSM Survey 2015 data (688 households) and multiple regression analysis, this study revealed structural drivers of private tutoring expenditure — identifying household income, parental education, and parental attitudes as independent predictors.</span>
       </div>
-      <div class="research-quote">
+      <button class="toggle-btn" id="resToggle" onclick="toggleRes()">
+        <span class="toggle-icon">+</span>
+        <span class="ja">詳細を見る</span><span class="en">Read more</span>
+      </button>
+      <div class="res-detail" id="resDetail">
+        <div class="res-detail-body">
+          <span class="ja">保護者の「教育への熱意」や「自身の通塾経験」は所得・学歴とは独立した押し上げ要因として機能し、教育格差の是正には経済支援に加え、保護者間の情報格差解消と地域特性を踏まえた多角的施策が必要であることを提言した。</span>
+          <span class="en">Parental enthusiasm and personal tutoring experience had significant independent effects beyond income and credentials. The study recommends multi-pronged policy — addressing not only economic barriers but also information gaps among parents and regional disparities in educational resources.</span>
+        </div>
+      </div>
+      <div class="res-quote">
         <span class="ja">「親の『学歴』と『塾経験』が、無意識に子の選択肢を縛る。― 教育格差の再生産メカニズムを計量化する。」</span>
         <span class="en">"Parental education and tutoring experience silently constrain children's opportunities. — Quantifying the reproduction mechanisms of educational inequality."</span>
       </div>
@@ -720,85 +924,97 @@
 </section>
 
 <!-- PROFILE -->
-<section class="section" id="profile" style="background: var(--off-white);">
+<section class="section" id="profile" style="background:var(--offwhite)">
   <div class="section-inner">
     <div class="section-label reveal">Profile</div>
     <div class="section-title reveal">
       <span class="ja">経歴と関心領域</span>
       <span class="en">Background &amp; Interests</span>
     </div>
-
     <div class="profile-grid">
-      <div class="timeline reveal">
-        <div class="timeline-item">
-          <div class="timeline-year">2026–</div>
-          <div class="timeline-content">
-            <div class="timeline-school">
+
+      <!-- Timeline -->
+      <div class="reveal">
+        <div class="col-label"><span class="ja">学歴</span><span class="en">Education</span></div>
+        <div class="tl-item">
+          <div class="tl-year">2026–</div>
+          <div class="tl-content">
+            <div class="tl-school">
               <span class="ja">早稲田大学大学院 会計研究科<br>会計専攻（在学中）</span>
               <span class="en">Waseda University Graduate School of Accountancy<br>Master of Professional Accountancy (current)</span>
             </div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2022–26</div>
-          <div class="timeline-content">
-            <div class="timeline-school">
-              <span class="ja">早稲田大学 人間科学部<br>社会科学・統計学を中心に研究</span>
-              <span class="en">Waseda University, Faculty of Human Sciences<br>Social Science &amp; Statistics</span>
+            <div class="tl-note">
+              <span class="ja">公認会計士試験勉強中 / アクチュアリー科目も履修</span>
+              <span class="en">Preparing for CPA exam / Auditing actuarial coursework</span>
             </div>
           </div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2019–22</div>
-          <div class="timeline-content">
-            <div class="timeline-school">
+        <div class="tl-item">
+          <div class="tl-year">2022–26</div>
+          <div class="tl-content">
+            <div class="tl-school">
+              <span class="ja">早稲田大学 人間科学部</span>
+              <span class="en">Waseda University, Faculty of Human Sciences</span>
+            </div>
+            <div class="tl-note">
+              <span class="ja">社会科学・統計学専攻 / SSM調査データ分析</span>
+              <span class="en">Social Science &amp; Statistics / SSM Survey data analysis</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2019–22</div>
+          <div class="tl-content">
+            <div class="tl-school">
               <span class="ja">横浜市立横浜サイエンスフロンティア高等学校</span>
               <span class="en">Yokohama Science Frontier High School</span>
             </div>
+            <div class="tl-note">
+              <span class="ja">在学中に日本の中小企業について研究</span>
+              <span class="en">Research on Japanese small and medium-sized enterprises</span>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- Interests -->
       <div class="interests reveal">
-        <h3>
-          <span class="ja">興味・関心領域</span>
-          <span class="en">Areas of Interest</span>
-        </h3>
-        <div class="interest-tags">
-          <span class="interest-tag ja">会計学</span>
-          <span class="interest-tag en" style="display:none">Accounting</span>
-          <span class="interest-tag ja">統計学</span>
-          <span class="interest-tag en" style="display:none">Statistics</span>
-          <span class="interest-tag ja">コンピュータサイエンス</span>
-          <span class="interest-tag en" style="display:none">Computer Science</span>
-          <span class="interest-tag ja">社会学</span>
-          <span class="interest-tag en" style="display:none">Sociology</span>
-          <span class="interest-tag ja">ビジネスアナリティクス</span>
-          <span class="interest-tag en" style="display:none">Business Analytics</span>
-          <span class="interest-tag ja">監査・リスク管理</span>
-          <span class="interest-tag en" style="display:none">Audit &amp; Risk</span>
+        <div class="col-label"><span class="ja">関心・現在</span><span class="en">Interests &amp; Now</span></div>
+        <h3><span class="ja">興味・関心領域</span><span class="en">Areas of Interest</span></h3>
+        <div class="tags">
+          <span class="tag ja">会計学</span><span class="tag en">Accounting</span>
+          <span class="tag ja">統計学</span><span class="tag en">Statistics</span>
+          <span class="tag ja">コンピュータサイエンス</span><span class="tag en">Computer Science</span>
+          <span class="tag ja">社会学</span><span class="tag en">Sociology</span>
+          <span class="tag ja">ビジネスアナリティクス</span><span class="tag en">Business Analytics</span>
+          <span class="tag ja">監査・リスク管理</span><span class="tag en">Audit &amp; Risk</span>
         </div>
-
-        <h3>
-          <span class="ja">現在取り組んでいること</span>
-          <span class="en">Currently</span>
-        </h3>
-        <div class="interest-tags">
-          <span class="interest-tag ja">公認会計士試験（論文式）勉強中</span>
-          <span class="interest-tag en" style="display:none">Preparing for CPA Board Exam</span>
-          <span class="interest-tag ja">アクチュアリー資格も視野に</span>
-          <span class="interest-tag en" style="display:none">Exploring Actuarial Science</span>
+        <h3><span class="ja">現在取り組んでいること</span><span class="en">Currently</span></h3>
+        <div class="tags">
+          <span class="tag ja">公認会計士試験（論文式）勉強中</span><span class="tag en">Preparing for CPA Board Exam</span>
+          <span class="tag ja">アクチュアリー資格も視野に</span><span class="tag en">Exploring Actuarial Science</span>
         </div>
-
-        <h3>
-          <span class="ja">目指すプロフェッショナル像</span>
-          <span class="en">Professional Vision</span>
-        </h3>
-        <p class="vision-note">
-          <span class="ja">会計の専門性にテクノロジーの翼を授け、複雑化する現代社会の意思決定を支える価値ある会計人へ。</span>
-          <span class="en">Empowering accounting expertise with technology — to become a trusted professional who supports critical decision-making in an increasingly complex world.</span>
-        </p>
       </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROFESSIONAL VISION (full-width) -->
+<section class="prof-vision-section">
+  <div class="prof-vision-inner">
+    <div class="prof-vision-label">
+      <span class="ja">目指すプロフェッショナル像</span>
+      <span class="en">Professional Vision</span>
+    </div>
+    <div class="prof-vision-quote">&ldquo;</div>
+    <p class="prof-vision-text">
+      <span class="ja">会計の専門性にテクノロジーの翼を授け、<br>複雑化する現代社会の意思決定を支える<br>価値ある会計人へ。</span>
+      <span class="en">Empowering accounting with the wings of technology —<br>to become a trusted professional who supports<br>critical decisions in an increasingly complex world.</span>
+    </p>
+    <div class="prof-vision-name">
+      <span class="prof-vision-dash">—</span>
+      Yamamoto Takuto
     </div>
   </div>
 </section>
@@ -813,17 +1029,14 @@
   </p>
 </section>
 
-<!-- PRIVACY POLICY -->
+<!-- PRIVACY -->
 <section class="privacy-section">
   <div class="privacy-inner">
     <details>
-      <summary>
-        <span class="ja">プライバシーポリシー</span>
-        <span class="en">Privacy Policy</span>
-      </summary>
+      <summary><span class="ja">プライバシーポリシー</span><span class="en">Privacy Policy</span></summary>
       <div class="privacy-body">
-        <span class="ja">本サイトは山本卓立の個人ホームページです。お問い合わせの際にいただいたメールアドレス等の個人情報は返信目的のみに使用し、第三者に提供することはありません。本サイトはGoogle Fontsを利用しており、アクセス解析ツールは使用していません。本ポリシーは予告なく変更することがあります。最終更新：2026年4月</span>
-        <span class="en">This is the personal website of Yamamoto Takuto. Personal information provided through contact (e.g. email addresses) is used solely for correspondence and will not be shared with third parties. This site uses Google Fonts. No analytics tools are used. This policy may be updated without prior notice. Last updated: April 2026</span>
+        <span class="ja">本サイトは山本卓立の個人ホームページです。お問い合わせの際にいただいた個人情報は返信目的のみに使用し、第三者に提供することはありません。本サイトはGoogle Fontsを利用しており、アクセス解析ツールは使用していません。最終更新：2026年4月</span>
+        <span class="en">This is the personal website of Yamamoto Takuto. Personal information provided through contact is used solely for correspondence and will not be shared with third parties. This site uses Google Fonts. No analytics tools are used. Last updated: April 2026</span>
       </div>
     </details>
   </div>
@@ -835,33 +1048,68 @@
   <div class="footer-copy">© 2026 Yamamoto Takuto. All rights reserved.</div>
 </footer>
 
+</div><!-- /page-body -->
+
 <script>
-  function setLang(lang) {
-    document.body.classList.toggle('en', lang === 'en');
-    document.documentElement.lang = lang;
-    document.querySelectorAll('.lang-btn').forEach((btn, i) => {
-      btn.classList.toggle('active', (i === 0 && lang === 'ja') || (i === 1 && lang === 'en'));
-    });
-  }
+function setLang(lang) {
+  const isEn = lang === 'en';
+  document.body.classList.toggle('en', isEn);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', isEn ? i === 1 : i === 0);
+  });
+}
 
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('visible', window.scrollY > window.innerHeight * 0.75);
-  }, { passive: true });
+// ── Hero scroll-fade effect
+// The header is sticky(z:1), page-body slides over it (z:2).
+// As user scrolls, we fade + scale the hero content out.
+const hdr = document.querySelector('header');
+const hdrLeft = document.querySelector('.hdr-left');
+const hdrRight = document.querySelector('.hdr-right');
 
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
-        const delay = siblings.indexOf(entry.target) * 90;
-        setTimeout(() => entry.target.classList.add('visible'), delay);
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+function onScroll() {
+  const scrollY = window.scrollY;
+  const vh = window.innerHeight;
 
-  revealEls.forEach(el => io.observe(el));
+  // Fade range: 0 → 60% of viewport height
+  const progress = Math.min(scrollY / (vh * 0.6), 1);
+
+  // Fade opacity & subtle upward drift on the text panels
+  const opacity = 1 - progress;
+  const translateY = progress * -40; // drift up 40px max
+
+  hdrLeft.style.opacity = opacity;
+  hdrRight.style.opacity = opacity;
+  hdrLeft.style.transform  = `translateY(${translateY}px)`;
+  hdrRight.style.transform = `translateY(${translateY * 0.6}px)`;
+
+  // Sticky nav
+  nav.classList.toggle('visible', scrollY > vh * 0.7);
+}
+
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', onScroll, { passive: true });
+
+// Research detail toggle
+function toggleRes() {
+  const d = document.getElementById('resDetail');
+  const b = document.getElementById('resToggle');
+  const open = d.classList.toggle('open');
+  b.classList.toggle('open', open);
+}
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const siblings = [...entry.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
+    const i = siblings.indexOf(entry.target);
+    setTimeout(() => entry.target.classList.add('visible'), i * 100);
+    io.unobserve(entry.target);
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
