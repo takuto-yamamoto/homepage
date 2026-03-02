@@ -825,44 +825,69 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
 </div><!-- /page-body -->
 
 <script>
-/* ── Language toggle ── */
+/* ════════════════════════════════════════
+   1. LANGUAGE TOGGLE
+   setLang('ja') / setLang('en')
+   ─ toggles body.en class
+   ─ swaps active state on .lang-btn buttons
+════════════════════════════════════════ */
 function setLang(lang) {
-  const isEn = lang === 'en';
+  var isEn = (lang === 'en');
   document.body.classList.toggle('en', isEn);
   document.documentElement.lang = lang;
-  document.querySelectorAll('.lang-btn').forEach((btn, i) => {
-    btn.classList.toggle('active', isEn ? i === 1 : i === 0);
+  document.querySelectorAll('.lang-btn').forEach(function(btn, i) {
+    btn.classList.toggle('active', isEn ? (i === 1) : (i === 0));
   });
 }
 
-/* ── Scroll-fade: desktop only (≥801px), disabled on mobile ── */
-const hdrLeft  = document.getElementById('hdrLeft');
-const hdrRight = document.getElementById('hdrRight');
-const nav      = document.getElementById('nav');
-const hdr      = document.querySelector('header');
+/* ════════════════════════════════════════
+   2. RESEARCH DETAIL TOGGLE
+   toggleRes()
+   ─ opens/closes #resDetail
+   ─ rotates the + icon via .open class
+════════════════════════════════════════ */
+function toggleRes() {
+  var detail = document.getElementById('resDetail');
+  var btn    = document.getElementById('resToggle');
+  if (!detail || !btn) return;
+  var isOpen = detail.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.setAttribute('aria-expanded', String(isOpen));
+}
+
+/* ════════════════════════════════════════
+   3. SCROLL HANDLERS
+   a) Sticky nav visibility
+   b) Hero fade-out (desktop only ≥ 801px)
+════════════════════════════════════════ */
+var nav      = document.getElementById('nav');
+var hdrLeft  = document.getElementById('hdrLeft');
+var hdrRight = document.getElementById('hdrRight');
 
 function onScroll() {
-  const scrollY = window.scrollY;
-  const vh = window.innerHeight;
-  const isDesktop = window.innerWidth > 800;
+  var scrollY   = window.scrollY || window.pageYOffset;
+  var vh        = window.innerHeight;
+  var isDesktop = window.innerWidth > 800;
 
-  /* Sticky nav */
-  nav.classList.toggle('visible', scrollY > vh * 0.7);
+  /* ── Sticky nav: appear after 70 % of viewport scrolled ── */
+  if (nav) {
+    nav.classList.toggle('visible', scrollY > vh * 0.7);
+  }
 
-  if (isDesktop) {
-    /* hero is position:sticky, page-body slides over it */
-    const progress = Math.min(scrollY / (vh * 0.65), 1);
-    const opacity  = 1 - progress;
-    const drift    = progress * -36;
-    hdrLeft.style.opacity   = opacity;
-    hdrLeft.style.transform = `translateY(${drift}px)`;
-    hdrRight.style.opacity  = opacity;
-    hdrRight.style.transform = `translateY(${drift * 0.55}px)`;
-  } else {
-    /* reset any inline styles on mobile so CSS takes over */
-    hdrLeft.style.opacity = '';
-    hdrLeft.style.transform = '';
-    hdrRight.style.opacity = '';
+  /* ── Hero fade (desktop only) ── */
+  if (isDesktop && hdrLeft && hdrRight) {
+    var progress = Math.min(scrollY / (vh * 0.65), 1);
+    var opacity  = 1 - progress;
+    var drift    = progress * -36;
+    hdrLeft.style.opacity    = opacity;
+    hdrLeft.style.transform  = 'translateY(' + drift + 'px)';
+    hdrRight.style.opacity   = opacity;
+    hdrRight.style.transform = 'translateY(' + (drift * 0.55) + 'px)';
+  } else if (hdrLeft && hdrRight) {
+    /* Mobile: clear any inline styles so CSS takes full control */
+    hdrLeft.style.opacity    = '';
+    hdrLeft.style.transform  = '';
+    hdrRight.style.opacity   = '';
     hdrRight.style.transform = '';
   }
 }
@@ -870,88 +895,33 @@ function onScroll() {
 window.addEventListener('scroll', onScroll, { passive: true });
 window.addEventListener('resize', onScroll, { passive: true });
 
-/* ── Research detail toggle ── */
-function toggleRes() {
-  const d = document.getElementById('resDetail');
-  const b = document.getElementById('resToggle');
-  const open = d.classList.toggle('open');
-  b.classList.toggle('open', open);
-}
+/* ════════════════════════════════════════
+   4. SCROLL REVEAL ANIMATION
+   Elements with class="reveal" fade in
+   with a per-sibling stagger delay when
+   they enter the viewport.
+════════════════════════════════════════ */
+(function() {
+  var revealEls = document.querySelectorAll('.reveal');
+  if (!revealEls.length) return;
 
-/* ── Scroll reveal ── */
-const io = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const siblings = [...entry.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
-    const i = siblings.indexOf(entry.target);
-    setTimeout(() => entry.target.classList.add('visible'), i * 100);
-    io.unobserve(entry.target);
-  });
-}, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
-
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
-   <script>
-  function setLang(lang) {
-    // 1. bodyのクラスを切り替えてCSSを適用させる
-    if (lang === 'en') {
-      document.body.classList.add('en');
-    } else {
-      document.body.classList.remove('en');
-    }
-
-    // 2. ボタンの「active」表示を切り替える
-    const btns = document.querySelectorAll('.lang-btn');
-    btns.forEach(btn => {
-      btn.classList.remove('active');
-      if (
-        (lang === 'ja' && btn.textContent === 'JA') || 
-        (lang === 'en' && btn.textContent === 'EN')
-      ) {
-        btn.classList.add('active');
-      }
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var el       = entry.target;
+      var siblings = Array.from(
+        el.parentElement.querySelectorAll('.reveal:not(.visible)')
+      );
+      var delay = siblings.indexOf(el) * 100;
+      setTimeout(function() {
+        el.classList.add('visible');
+      }, delay);
+      observer.unobserve(el);
     });
+  }, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
 
-    // (オプション) ページ上部へ戻るなどの処理が必要ならここに追加
-  }
-
-  // 研究詳細の開閉用スクリプト（これも必要でした）
-  function toggleRes() {
-    const detail = document.getElementById('resDetail');
-    const btn = document.getElementById('resToggle');
-    const icon = btn.querySelector('.toggle-icon');
-    
-    if (detail.style.display === 'block') {
-      detail.style.display = 'none';
-      btn.classList.remove('open');
-      icon.textContent = '+';
-    } else {
-      detail.style.display = 'block';
-      btn.classList.add('open');
-      icon.textContent = '×';
-    }
-  }
-
-  // スクロールアニメーション用のスクリプト
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // ナビゲーションの表示制御
-  window.addEventListener('scroll', () => {
-    const nav = document.getElementById('nav');
-    if (window.scrollY > 100) {
-      nav.classList.add('visible');
-    } else {
-      nav.classList.remove('visible');
-    }
-  });
+  revealEls.forEach(function(el) { observer.observe(el); });
+})();
 </script>
 </body>
 </html>
