@@ -44,9 +44,11 @@ body {
 /* ══════════════════════════════════
    LANGUAGE
 ══════════════════════════════════ */
-.en { display: none; }
-body.en .ja { display: none !important; }
-body.en .en { display: inline !important; }
+.lang-en { display: none !important; }
+.lang-ja { display: inline; }
+body.en .lang-ja { display: none !important; }
+body.en .lang-en { display: inline !important; }
+body.en div.lang-en, body.en p.lang-en, body.en li.lang-en { display: block !important; }
 
 /* EN font overrides */
 body.en .theme-text   { font-family: 'Cormorant Garamond', serif; font-size: clamp(19px, 2.4vw, 28px); }
@@ -530,9 +532,9 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
 <nav id="nav">
   <span class="nav-name">Yamamoto Takuto</span>
   <ul class="nav-links">
-    <li><a href="#vision"><span class="ja">ビジョン</span><span class="en">Vision</span></a></li>
-    <li><a href="#research"><span class="ja">研究</span><span class="en">Research</span></a></li>
-    <li><a href="#profile"><span class="ja">プロフィール</span><span class="en">Profile</span></a></li>
+    <li><a href="#vision"><span class="lang-ja">ビジョン</span><span class="lang-en">Vision</span></a></li>
+    <li><a href="#research"><span class="lang-ja">研究</span><span class="lang-en">Research</span></a></li>
+    <li><a href="#profile"><span class="lang-ja">プロフィール</span><span class="lang-en">Profile</span></a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -544,19 +546,19 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
     <div class="name-en">YAMAMOTO TAKUTO</div>
     <div class="hdr-line"></div>
     <div class="hdr-tagline">
-      <span class="ja">早稲田大学大学院 会計研究科<br>会計修士（専門職） 1年</span>
-      <span class="en">Master of Professional Accountancy, Year 1<br>Waseda University Graduate School of Accountancy</span>
+      <span class="lang-ja">早稲田大学大学院 会計研究科<br>会計修士（専門職） 1年</span>
+      <span class="lang-en">Master of Professional Accountancy, Year 1<br>Waseda University Graduate School of Accountancy</span>
     </div>
   </div>
   <div class="hdr-right" id="hdrRight">
     <div class="value-hook">Accounting × ICT × Data Science</div>
     <div class="theme-text">
-      <span class="ja">次世代型会計プロフェッショナルへ。<br>ダブルライセンスで意思決定を支える。</span>
-      <span class="en">Toward the Next-Generation<br>Accounting Professional —<br>Dual Licensure for Better Decisions.</span>
+      <span class="lang-ja">次世代型会計プロフェッショナルへ。<br>ダブルライセンスで意思決定を支える。</span>
+      <span class="lang-en">Toward the Next-Generation<br>Accounting Professional —<br>Dual Licensure for Better Decisions.</span>
     </div>
     <div class="hdr-desc">
-      <span class="ja">公認会計士×アクチュアリーの資格取得を視野に、テクノロジーとデータで会計の専門性を拡張する。</span>
-      <span class="en">Pursuing dual credentials as CPA and Actuary, expanding accounting expertise through technology and data science.</span>
+      <span class="lang-ja">公認会計士×アクチュアリーの資格取得を視野に、テクノロジーとデータで会計の専門性を拡張する。</span>
+      <span class="lang-en">Pursuing dual credentials as CPA and Actuary, expanding accounting expertise through technology and data science.</span>
     </div>
     <div class="keywords">
       <span class="keyword">Accounting</span>
@@ -568,17 +570,17 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
     <div class="audience-nav">
       <a href="#vision" class="audience-btn">
         <svg class="btn-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.2"/><circle cx="10" cy="10" r="4.5" stroke="currentColor" stroke-width="1.2"/><circle cx="10" cy="10" r="1.5" fill="currentColor"/></svg>
-        <span class="ja">ビジョン・研究方針</span><span class="en">Vision &amp; Research</span>
+        <span class="lang-ja">ビジョン・研究方針</span><span class="lang-en">Vision &amp; Research</span>
         <svg class="btn-arrow" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2.5 7l3.5 3 3.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a href="#profile" class="audience-btn">
         <svg class="btn-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.2"/><path d="M3 17.5c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-        <span class="ja">経歴・スキル</span><span class="en">Background &amp; Skills</span>
+        <span class="lang-ja">経歴・スキル</span><span class="lang-en">Background &amp; Skills</span>
         <svg class="btn-arrow" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2.5 7l3.5 3 3.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a href="#contact" class="audience-btn">
         <svg class="btn-icon" viewBox="0 0 20 20" fill="none"><rect x="2" y="4.5" width="16" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 6.5l8 5.5 8-5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span class="ja">連絡する</span><span class="en">Get in Touch</span>
+        <span class="lang-ja">連絡する</span><span class="lang-en">Get in Touch</span>
         <svg class="btn-arrow" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2.5 7l3.5 3 3.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -596,57 +598,57 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
   <div class="section-inner">
     <div class="section-label">Vision</div>
     <div class="section-title reveal">
-      <span class="ja">大学院で成し遂げたいこと</span>
-      <span class="en">What I Aim to Achieve in Graduate School</span>
+      <span class="lang-ja">大学院で成し遂げたいこと</span>
+      <span class="lang-en">What I Aim to Achieve in Graduate School</span>
     </div>
     <div class="section-sub reveal">
-      <span class="ja">会計を軸に、ICTとデータで意思決定を支える専門性を構築する。3つの柱に集約した行動指針。</span>
-      <span class="en">Building expertise that supports decision-making through accounting, ICT, and data — three core pillars.</span>
+      <span class="lang-ja">会計を軸に、ICTとデータで意思決定を支える専門性を構築する。3つの柱に集約した行動指針。</span>
+      <span class="lang-en">Building expertise that supports decision-making through accounting, ICT, and data — three core pillars.</span>
     </div>
     <div class="pillars">
       <div class="pillar reveal">
         <div class="pillar-num">01</div>
         <div class="pillar-title">
-          <span class="ja">テクノロジーによる会計の革新</span>
-          <span class="en">Innovating Accounting Through Technology</span>
+          <span class="lang-ja">テクノロジーによる会計の革新</span>
+          <span class="lang-en">Innovating Accounting Through Technology</span>
         </div>
         <div class="pillar-body">
-          <span class="ja">ICTの進化が監査・会計実務に与える影響を研究し、実務直結のイノベーションを探求する。</span>
-          <span class="en">Researching how ICT reshapes audit and accounting, exploring practical innovations for the profession.</span>
+          <span class="lang-ja">ICTの進化が監査・会計実務に与える影響を研究し、実務直結のイノベーションを探求する。</span>
+          <span class="lang-en">Researching how ICT reshapes audit and accounting, exploring practical innovations for the profession.</span>
         </div>
         <div class="pillar-detail">
-          <span class="ja">画像認識技術等を活用した不正検出や業務自動化を構想。会計的知見と技術的知識を融合させた高付加価値なソリューションを目指す。</span>
-          <span class="en">Envisioning fraud detection via image recognition and workflow automation — merging accounting judgment with technical knowledge for high-value solutions.</span>
+          <span class="lang-ja">画像認識技術等を活用した不正検出や業務自動化を構想。会計的知見と技術的知識を融合させた高付加価値なソリューションを目指す。</span>
+          <span class="lang-en">Envisioning fraud detection via image recognition and workflow automation — merging accounting judgment with technical knowledge for high-value solutions.</span>
         </div>
       </div>
       <div class="pillar reveal">
         <div class="pillar-num">02</div>
         <div class="pillar-title">
-          <span class="ja">データ駆動型アプローチ × ダブルライセンス</span>
-          <span class="en">Data-Driven Expertise × Dual Licensure</span>
+          <span class="lang-ja">データ駆動型アプローチ × ダブルライセンス</span>
+          <span class="lang-en">Data-Driven Expertise × Dual Licensure</span>
         </div>
         <div class="pillar-body">
-          <span class="ja">学部の統計分析経験を活かし、ビジネスアナリティクスを深化させる。</span>
-          <span class="en">Deepening business analytics capabilities built on undergraduate statistical research.</span>
+          <span class="lang-ja">学部の統計分析経験を活かし、ビジネスアナリティクスを深化させる。</span>
+          <span class="lang-en">Deepening business analytics capabilities built on undergraduate statistical research.</span>
         </div>
         <div class="pillar-detail">
-          <span class="ja">会計専門コースに身を置きつつアクチュアリー科目にも挑戦。「会計士×アクチュアリー」のダブルライセンスで、財務報告とリスク定量化の両輪を担える人材を目指す。</span>
-          <span class="en">While completing the accounting curriculum, pursuing actuarial coursework — targeting dual credentials as CPA and Actuary, mastering financial reporting and quantitative risk assessment.</span>
+          <span class="lang-ja">会計専門コースに身を置きつつアクチュアリー科目にも挑戦。「会計士×アクチュアリー」のダブルライセンスで、財務報告とリスク定量化の両輪を担える人材を目指す。</span>
+          <span class="lang-en">While completing the accounting curriculum, pursuing actuarial coursework — targeting dual credentials as CPA and Actuary, mastering financial reporting and quantitative risk assessment.</span>
         </div>
       </div>
       <div class="pillar reveal">
         <div class="pillar-num">03</div>
         <div class="pillar-title">
-          <span class="ja">公認会計士試験合格 × 実践力の養成</span>
-          <span class="en">CPA Exam Success × Applied Competence</span>
+          <span class="lang-ja">公認会計士試験合格 × 実践力の養成</span>
+          <span class="lang-en">CPA Exam Success × Applied Competence</span>
         </div>
         <div class="pillar-body">
-          <span class="ja">在学中の論文式試験合格を最優先とし、理論と実践の有機的な統合を図る。</span>
-          <span class="en">Prioritizing CPA board exam success, organically linking theory and practice.</span>
+          <span class="lang-ja">在学中の論文式試験合格を最優先とし、理論と実践の有機的な統合を図る。</span>
+          <span class="lang-en">Prioritizing CPA board exam success, organically linking theory and practice.</span>
         </div>
         <div class="pillar-detail">
-          <span class="ja">単なる試験対策に留まらず、大学院での理論研究と実践的学びを結びつけることで、実務に即応できる高度な応用力を養う。試験合格はスタートライン。</span>
-          <span class="en">Going beyond exam prep — connecting graduate research with practical learning to develop advanced professional judgment. Passing the exam is only the starting line.</span>
+          <span class="lang-ja">単なる試験対策に留まらず、大学院での理論研究と実践的学びを結びつけることで、実務に即応できる高度な応用力を養う。試験合格はスタートライン。</span>
+          <span class="lang-en">Going beyond exam prep — connecting graduate research with practical learning to develop advanced professional judgment. Passing the exam is only the starting line.</span>
         </div>
       </div>
     </div>
@@ -661,36 +663,36 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
   <div class="section-inner">
     <div class="section-label reveal">Past Research</div>
     <div class="section-title reveal">
-      <span class="ja">学部での研究</span>
-      <span class="en">Undergraduate Research</span>
+      <span class="lang-ja">学部での研究</span>
+      <span class="lang-en">Undergraduate Research</span>
     </div>
     <div class="section-sub reveal">
-      <span class="ja">データと統計で社会現象を計量化する手法を習得した原点。</span>
-      <span class="en">Where I developed the quantitative approach that now drives my work in accounting and data science.</span>
+      <span class="lang-ja">データと統計で社会現象を計量化する手法を習得した原点。</span>
+      <span class="lang-en">Where I developed the quantitative approach that now drives my work in accounting and data science.</span>
     </div>
     <div class="research-card reveal">
       <div class="research-meta">2022–2026 &ensp;／&ensp; Waseda University, Faculty of Human Sciences</div>
       <div class="res-title">
-        <span class="ja">学校外教育費支出の規定要因<br>― 中学生の塾代に対する保護者要因の統計的検証 ―</span>
-        <span class="en">Determinants of Out-of-School Education Expenditure<br>― A Statistical Examination of Parental Factors ―</span>
+        <span class="lang-ja">学校外教育費支出の規定要因<br>― 中学生の塾代に対する保護者要因の統計的検証 ―</span>
+        <span class="lang-en">Determinants of Out-of-School Education Expenditure<br>― A Statistical Examination of Parental Factors ―</span>
       </div>
       <div class="res-summary-short">
-        <span class="ja">SSM調査2015年データ（688世帯）を用いた重回帰分析により、塾代格差の構造的要因を解明。世帯年収・親の学歴に加え、保護者の「教育熱意」や「通塾経験」が独立した影響を持つことを統計的に検証した。</span>
-        <span class="en">Using SSM Survey 2015 data (688 households) and multiple regression analysis, this study revealed structural drivers of private tutoring expenditure — identifying household income, parental education, and parental attitudes as independent predictors.</span>
+        <span class="lang-ja">SSM調査2015年データ（688世帯）を用いた重回帰分析により、塾代格差の構造的要因を解明。世帯年収・親の学歴に加え、保護者の「教育熱意」や「通塾経験」が独立した影響を持つことを統計的に検証した。</span>
+        <span class="lang-en">Using SSM Survey 2015 data (688 households) and multiple regression analysis, this study revealed structural drivers of private tutoring expenditure — identifying household income, parental education, and parental attitudes as independent predictors.</span>
       </div>
       <button class="toggle-btn" id="resToggle" onclick="toggleRes()">
         <span class="toggle-icon">+</span>
-        <span class="ja">詳細を見る</span><span class="en">Read more</span>
+        <span class="lang-ja">詳細を見る</span><span class="lang-en">Read more</span>
       </button>
       <div class="res-detail" id="resDetail">
         <div class="res-detail-body">
-          <span class="ja">保護者の「教育への熱意」や「自身の通塾経験」は所得・学歴とは独立した押し上げ要因として機能し、教育格差の是正には経済支援に加え、保護者間の情報格差解消と地域特性を踏まえた多角的施策が必要であることを提言した。</span>
-          <span class="en">Parental enthusiasm and personal tutoring experience had significant independent effects beyond income and credentials. The study recommends multi-pronged policy — addressing not only economic barriers but also information gaps among parents and regional disparities.</span>
+          <span class="lang-ja">保護者の「教育への熱意」や「自身の通塾経験」は所得・学歴とは独立した押し上げ要因として機能し、教育格差の是正には経済支援に加え、保護者間の情報格差解消と地域特性を踏まえた多角的施策が必要であることを提言した。</span>
+          <span class="lang-en">Parental enthusiasm and personal tutoring experience had significant independent effects beyond income and credentials. The study recommends multi-pronged policy — addressing not only economic barriers but also information gaps among parents and regional disparities.</span>
         </div>
       </div>
       <div class="res-quote">
-        <span class="ja">「親の『学歴』と『塾経験』が、無意識に子の選択肢を縛る。― 教育格差の再生産メカニズムを計量化する。」</span>
-        <span class="en">"Parental education and tutoring experience silently constrain children's opportunities. — Quantifying the reproduction mechanisms of educational inequality."</span>
+        <span class="lang-ja">「親の『学歴』と『塾経験』が、無意識に子の選択肢を縛る。― 教育格差の再生産メカニズムを計量化する。」</span>
+        <span class="lang-en">"Parental education and tutoring experience silently constrain children's opportunities. — Quantifying the reproduction mechanisms of educational inequality."</span>
       </div>
     </div>
   </div>
@@ -704,22 +706,22 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
   <div class="section-inner">
     <div class="section-label reveal">Profile</div>
     <div class="section-title reveal">
-      <span class="ja">経歴と関心領域</span>
-      <span class="en">Background &amp; Interests</span>
+      <span class="lang-ja">経歴と関心領域</span>
+      <span class="lang-en">Background &amp; Interests</span>
     </div>
     <div class="profile-grid">
       <div class="reveal">
-        <div class="col-label"><span class="ja">学歴</span><span class="en">Education</span></div>
+        <div class="col-label"><span class="lang-ja">学歴</span><span class="lang-en">Education</span></div>
         <div class="tl-item">
           <div class="tl-year">2026–</div>
           <div class="tl-content">
             <div class="tl-school">
-              <span class="ja">早稲田大学大学院 会計研究科<br>会計専攻（在学中）</span>
-              <span class="en">Waseda University Graduate School of Accountancy<br>Master of Professional Accountancy (current)</span>
+              <span class="lang-ja">早稲田大学大学院 会計研究科<br>会計専攻（在学中）</span>
+              <span class="lang-en">Waseda University Graduate School of Accountancy<br>Master of Professional Accountancy (current)</span>
             </div>
             <div class="tl-note">
-              <span class="ja">公認会計士試験勉強中 / アクチュアリー科目も履修</span>
-              <span class="en">Preparing for CPA exam / Auditing actuarial coursework</span>
+              <span class="lang-ja">公認会計士試験勉強中 / アクチュアリー科目も履修</span>
+              <span class="lang-en">Preparing for CPA exam / Auditing actuarial coursework</span>
             </div>
           </div>
         </div>
@@ -727,12 +729,12 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
           <div class="tl-year">2022–26</div>
           <div class="tl-content">
             <div class="tl-school">
-              <span class="ja">早稲田大学 人間科学部</span>
-              <span class="en">Waseda University, Faculty of Human Sciences</span>
+              <span class="lang-ja">早稲田大学 人間科学部</span>
+              <span class="lang-en">Waseda University, Faculty of Human Sciences</span>
             </div>
             <div class="tl-note">
-              <span class="ja">社会科学・統計学専攻 / SSM調査データ分析</span>
-              <span class="en">Social Science &amp; Statistics / SSM Survey data analysis</span>
+              <span class="lang-ja">社会科学・統計学専攻 / SSM調査データ分析</span>
+              <span class="lang-en">Social Science &amp; Statistics / SSM Survey data analysis</span>
             </div>
           </div>
         </div>
@@ -740,32 +742,32 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
           <div class="tl-year">2019–22</div>
           <div class="tl-content">
             <div class="tl-school">
-              <span class="ja">横浜市立横浜サイエンスフロンティア高等学校</span>
-              <span class="en">Yokohama Science Frontier High School</span>
+              <span class="lang-ja">横浜市立横浜サイエンスフロンティア高等学校</span>
+              <span class="lang-en">Yokohama Science Frontier High School</span>
             </div>
             <div class="tl-note">
-              <span class="ja">在学中に日本の中小企業について研究</span>
-              <span class="en">Research on Japanese small and medium-sized enterprises</span>
+              <span class="lang-ja">在学中に日本の中小企業について研究</span>
+              <span class="lang-en">Research on Japanese small and medium-sized enterprises</span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="interests reveal">
-        <div class="col-label"><span class="ja">関心・現在</span><span class="en">Interests &amp; Now</span></div>
-        <h3><span class="ja">興味・関心領域</span><span class="en">Areas of Interest</span></h3>
+        <div class="col-label"><span class="lang-ja">関心・現在</span><span class="lang-en">Interests &amp; Now</span></div>
+        <h3><span class="lang-ja">興味・関心領域</span><span class="lang-en">Areas of Interest</span></h3>
         <div class="tags">
-          <span class="tag ja">会計学</span><span class="tag en">Accounting</span>
-          <span class="tag ja">統計学</span><span class="tag en">Statistics</span>
-          <span class="tag ja">コンピュータサイエンス</span><span class="tag en">Computer Science</span>
-          <span class="tag ja">社会学</span><span class="tag en">Sociology</span>
-          <span class="tag ja">ビジネスアナリティクス</span><span class="tag en">Business Analytics</span>
-          <span class="tag ja">監査・リスク管理</span><span class="tag en">Audit &amp; Risk</span>
+          <span class="tag lang-ja">会計学</span><span class="tag lang-en">Accounting</span>
+          <span class="tag lang-ja">統計学</span><span class="tag lang-en">Statistics</span>
+          <span class="tag lang-ja">コンピュータサイエンス</span><span class="tag lang-en">Computer Science</span>
+          <span class="tag lang-ja">社会学</span><span class="tag lang-en">Sociology</span>
+          <span class="tag lang-ja">ビジネスアナリティクス</span><span class="tag lang-en">Business Analytics</span>
+          <span class="tag lang-ja">監査・リスク管理</span><span class="tag lang-en">Audit &amp; Risk</span>
         </div>
-        <h3><span class="ja">現在取り組んでいること</span><span class="en">Currently</span></h3>
+        <h3><span class="lang-ja">現在取り組んでいること</span><span class="lang-en">Currently</span></h3>
         <div class="tags">
-          <span class="tag ja">公認会計士試験（論文式）勉強中</span><span class="tag en">Preparing for CPA Board Exam</span>
-          <span class="tag ja">アクチュアリー資格も視野に</span><span class="tag en">Exploring Actuarial Science</span>
+          <span class="tag lang-ja">公認会計士試験（論文式）勉強中</span><span class="tag lang-en">Preparing for CPA Board Exam</span>
+          <span class="tag lang-ja">アクチュアリー資格も視野に</span><span class="tag lang-en">Exploring Actuarial Science</span>
         </div>
       </div>
     </div>
@@ -776,13 +778,13 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
 <section class="prof-vision-section">
   <div class="prof-vision-inner">
     <div class="prof-vision-label">
-      <span class="ja">目指すプロフェッショナル像</span>
-      <span class="en">Professional Vision</span>
+      <span class="lang-ja">目指すプロフェッショナル像</span>
+      <span class="lang-en">Professional Vision</span>
     </div>
     <div class="prof-vision-quote">&ldquo;</div>
     <p class="prof-vision-text">
-      <span class="ja">会計の専門性にテクノロジーの翼を授け、<br>複雑化する現代社会の意思決定を支える<br>価値ある会計人へ。</span>
-      <span class="en">Empowering accounting with the wings of technology —<br>to become a trusted professional who supports<br>critical decisions in an increasingly complex world.</span>
+      <span class="lang-ja">会計の専門性にテクノロジーの翼を授け、<br>複雑化する現代社会の意思決定を支える<br>価値ある会計人へ。</span>
+      <span class="lang-en">Empowering accounting with the wings of technology —<br>to become a trusted professional who supports<br>critical decisions in an increasingly complex world.</span>
     </p>
     <div class="prof-vision-name">
       <span class="prof-vision-dash">—</span>Yamamoto Takuto
@@ -798,8 +800,8 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
   <div class="section-label">Contact</div>
   <a href="mailto:takuto.y@outlook.com" class="contact-email">takuto.y@outlook.com</a>
   <p class="contact-note">
-    <span class="ja">お気軽にご連絡ください</span>
-    <span class="en">Feel free to reach out</span>
+    <span class="lang-ja">お気軽にご連絡ください</span>
+    <span class="lang-en">Feel free to reach out</span>
   </p>
 </section>
 
@@ -807,10 +809,10 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
 <section class="privacy-section">
   <div class="privacy-inner">
     <details>
-      <summary><span class="ja">プライバシーポリシー</span><span class="en">Privacy Policy</span></summary>
+      <summary><span class="lang-ja">プライバシーポリシー</span><span class="lang-en">Privacy Policy</span></summary>
       <div class="privacy-body">
-        <span class="ja">本サイトは山本卓立の個人ホームページです。お問い合わせの際にいただいた個人情報は返信目的のみに使用し、第三者に提供することはありません。本サイトはGoogle Fontsを利用しており、アクセス解析ツールは使用していません。最終更新：2026年4月</span>
-        <span class="en">This is the personal website of Yamamoto Takuto. Personal information provided through contact is used solely for correspondence and will not be shared with third parties. This site uses Google Fonts. No analytics tools are used. Last updated: April 2026</span>
+        <span class="lang-ja">本サイトは山本卓立の個人ホームページです。お問い合わせの際にいただいた個人情報は返信目的のみに使用し、第三者に提供することはありません。本サイトはGoogle Fontsを利用しており、アクセス解析ツールは使用していません。最終更新：2026年4月</span>
+        <span class="lang-en">This is the personal website of Yamamoto Takuto. Personal information provided through contact is used solely for correspondence and will not be shared with third parties. This site uses Google Fonts. No analytics tools are used. Last updated: April 2026</span>
       </div>
     </details>
   </div>
@@ -825,102 +827,125 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
 </div><!-- /page-body -->
 
 <script>
-/* ════════════════════════════════════════
-   1. LANGUAGE TOGGLE
-   setLang('ja') / setLang('en')
-   ─ toggles body.en class
-   ─ swaps active state on .lang-btn buttons
-════════════════════════════════════════ */
+/* ─────────────────────────────────────────────────────
+   LANGUAGE TOGGLE
+   Switches body between Japanese (default) and English.
+   Relies on CSS:
+     .lang-en  { display: none }
+     body.en .lang-ja { display: none !important }
+     body.en .lang-en { display: inline !important }
+     body.en div.lang-en, body.en p.lang-en { display: block !important }
+───────────────────────────────────────────────────── */
 function setLang(lang) {
-  var isEn = (lang === 'en');
-  document.body.classList.toggle('en', isEn);
-  document.documentElement.lang = lang;
-  document.querySelectorAll('.lang-btn').forEach(function(btn, i) {
-    btn.classList.toggle('active', isEn ? (i === 1) : (i === 0));
-  });
+  try {
+    var isEn = (lang === 'en');
+    document.body.classList.toggle('en', isEn);
+    document.documentElement.setAttribute('lang', lang);
+    var btns = document.querySelectorAll('.lang-btn');
+    for (var i = 0; i < btns.length; i++) {
+      if (isEn) {
+        btns[i].classList.toggle('active', i === 1);
+      } else {
+        btns[i].classList.toggle('active', i === 0);
+      }
+    }
+  } catch(e) {
+    console.error('setLang error:', e);
+  }
 }
 
-/* ════════════════════════════════════════
-   2. RESEARCH DETAIL TOGGLE
-   toggleRes()
-   ─ opens/closes #resDetail
-   ─ rotates the + icon via .open class
-════════════════════════════════════════ */
+/* ─────────────────────────────────────────────────────
+   RESEARCH DETAIL TOGGLE
+───────────────────────────────────────────────────── */
 function toggleRes() {
-  var detail = document.getElementById('resDetail');
-  var btn    = document.getElementById('resToggle');
-  if (!detail || !btn) return;
-  var isOpen = detail.classList.toggle('open');
-  btn.classList.toggle('open', isOpen);
-  btn.setAttribute('aria-expanded', String(isOpen));
-}
-
-/* ════════════════════════════════════════
-   3. SCROLL HANDLERS
-   a) Sticky nav visibility
-   b) Hero fade-out (desktop only ≥ 801px)
-════════════════════════════════════════ */
-var nav      = document.getElementById('nav');
-var hdrLeft  = document.getElementById('hdrLeft');
-var hdrRight = document.getElementById('hdrRight');
-
-function onScroll() {
-  var scrollY   = window.scrollY || window.pageYOffset;
-  var vh        = window.innerHeight;
-  var isDesktop = window.innerWidth > 800;
-
-  /* ── Sticky nav: appear after 70 % of viewport scrolled ── */
-  if (nav) {
-    nav.classList.toggle('visible', scrollY > vh * 0.7);
-  }
-
-  /* ── Hero fade (desktop only) ── */
-  if (isDesktop && hdrLeft && hdrRight) {
-    var progress = Math.min(scrollY / (vh * 0.65), 1);
-    var opacity  = 1 - progress;
-    var drift    = progress * -36;
-    hdrLeft.style.opacity    = opacity;
-    hdrLeft.style.transform  = 'translateY(' + drift + 'px)';
-    hdrRight.style.opacity   = opacity;
-    hdrRight.style.transform = 'translateY(' + (drift * 0.55) + 'px)';
-  } else if (hdrLeft && hdrRight) {
-    /* Mobile: clear any inline styles so CSS takes full control */
-    hdrLeft.style.opacity    = '';
-    hdrLeft.style.transform  = '';
-    hdrRight.style.opacity   = '';
-    hdrRight.style.transform = '';
+  try {
+    var detail = document.getElementById('resDetail');
+    var btn    = document.getElementById('resToggle');
+    if (!detail || !btn) return;
+    var isOpen = detail.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
+  } catch(e) {
+    console.error('toggleRes error:', e);
   }
 }
 
-window.addEventListener('scroll', onScroll, { passive: true });
-window.addEventListener('resize', onScroll, { passive: true });
-
-/* ════════════════════════════════════════
-   4. SCROLL REVEAL ANIMATION
-   Elements with class="reveal" fade in
-   with a per-sibling stagger delay when
-   they enter the viewport.
-════════════════════════════════════════ */
+/* ─────────────────────────────────────────────────────
+   SCROLL: NAV VISIBILITY + HERO FADE (desktop only)
+───────────────────────────────────────────────────── */
 (function() {
-  var revealEls = document.querySelectorAll('.reveal');
-  if (!revealEls.length) return;
+  var nav      = document.getElementById('nav');
+  var hdrLeft  = document.getElementById('hdrLeft');
+  var hdrRight = document.getElementById('hdrRight');
 
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (!entry.isIntersecting) return;
-      var el       = entry.target;
-      var siblings = Array.from(
-        el.parentElement.querySelectorAll('.reveal:not(.visible)')
-      );
-      var delay = siblings.indexOf(el) * 100;
-      setTimeout(function() {
-        el.classList.add('visible');
-      }, delay);
-      observer.unobserve(el);
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
+  function onScroll() {
+    try {
+      var scrollY   = window.scrollY || window.pageYOffset || 0;
+      var vh        = window.innerHeight || 800;
+      var isDesktop = window.innerWidth > 800;
 
-  revealEls.forEach(function(el) { observer.observe(el); });
+      if (nav) {
+        if (scrollY > vh * 0.7) {
+          nav.classList.add('visible');
+        } else {
+          nav.classList.remove('visible');
+        }
+      }
+
+      if (isDesktop && hdrLeft && hdrRight) {
+        var progress = Math.min(scrollY / (vh * 0.65), 1);
+        var opacity  = 1 - progress;
+        var drift    = progress * -36;
+        hdrLeft.style.opacity    = String(opacity);
+        hdrLeft.style.transform  = 'translateY(' + drift + 'px)';
+        hdrRight.style.opacity   = String(opacity);
+        hdrRight.style.transform = 'translateY(' + (drift * 0.55) + 'px)';
+      } else if (hdrLeft && hdrRight) {
+        hdrLeft.style.opacity    = '';
+        hdrLeft.style.transform  = '';
+        hdrRight.style.opacity   = '';
+        hdrRight.style.transform = '';
+      }
+    } catch(e) {
+      console.error('onScroll error:', e);
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+})();
+
+/* ─────────────────────────────────────────────────────
+   SCROLL REVEAL
+───────────────────────────────────────────────────── */
+(function() {
+  try {
+    var revealEls = document.querySelectorAll('.reveal');
+    if (!revealEls.length) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+      for (var i = 0; i < entries.length; i++) {
+        var entry = entries[i];
+        if (!entry.isIntersecting) continue;
+        var el = entry.target;
+        var parent = el.parentElement;
+        var siblings = parent ? Array.from(parent.querySelectorAll('.reveal:not(.visible)')) : [];
+        var delay = siblings.indexOf(el) * 100;
+        (function(el, delay) {
+          setTimeout(function() {
+            el.classList.add('visible');
+          }, Math.max(0, delay));
+        })(el, delay);
+        observer.unobserve(el);
+      }
+    }, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
+
+    for (var j = 0; j < revealEls.length; j++) {
+      observer.observe(revealEls[j]);
+    }
+  } catch(e) {
+    console.error('reveal error:', e);
+  }
 })();
 </script>
 </body>
