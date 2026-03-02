@@ -891,5 +891,67 @@ const io = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
+   <script>
+  function setLang(lang) {
+    // 1. bodyのクラスを切り替えてCSSを適用させる
+    if (lang === 'en') {
+      document.body.classList.add('en');
+    } else {
+      document.body.classList.remove('en');
+    }
+
+    // 2. ボタンの「active」表示を切り替える
+    const btns = document.querySelectorAll('.lang-btn');
+    btns.forEach(btn => {
+      btn.classList.remove('active');
+      if (
+        (lang === 'ja' && btn.textContent === 'JA') || 
+        (lang === 'en' && btn.textContent === 'EN')
+      ) {
+        btn.classList.add('active');
+      }
+    });
+
+    // (オプション) ページ上部へ戻るなどの処理が必要ならここに追加
+  }
+
+  // 研究詳細の開閉用スクリプト（これも必要でした）
+  function toggleRes() {
+    const detail = document.getElementById('resDetail');
+    const btn = document.getElementById('resToggle');
+    const icon = btn.querySelector('.toggle-icon');
+    
+    if (detail.style.display === 'block') {
+      detail.style.display = 'none';
+      btn.classList.remove('open');
+      icon.textContent = '+';
+    } else {
+      detail.style.display = 'block';
+      btn.classList.add('open');
+      icon.textContent = '×';
+    }
+  }
+
+  // スクロールアニメーション用のスクリプト
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ナビゲーションの表示制御
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('nav');
+    if (window.scrollY > 100) {
+      nav.classList.add('visible');
+    } else {
+      nav.classList.remove('visible');
+    }
+  });
+</script>
 </body>
 </html>
