@@ -4,10 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>山本卓立 | Yamamoto Takuto — 会計×ICT×データサイエンス</title>
-<meta name="description" content="山本卓立の個人サイト。早稲田大学大学院会計研究科。会計×ICT×データサイエンスで次世代の会計プロフェッショナルを目指す。">
+<meta name="description" content="山本卓立の個人サイト。早稲田大学大学院会計研究科。管理会計ゼミでDID・ランダムフォレストを用いた実証研究に取り組みながら、会計×ICT×データサイエンスで次世代の会計プロフェッショナルを目指す。">
 <meta property="og:title" content="山本卓立 | Accounting × ICT × Data Science">
-<meta property="og:description" content="早稲田大学大学院 会計研究科。会計×ICT×データサイエンスで次世代の会計プロフェッショナルを目指す。統計・機械学習で会計の専門性を拡張する。">
+<meta property="og:description" content="早稲田大学大学院 会計研究科。管理会計ゼミでDID・ランダムフォレストを用いた実証研究に取り組みながら、公認会計士・USCPA試験合格による専門性の証明を目指す。統計・機械学習で会計の専門性を拡張する。">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0a1628">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a1628'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' fill='%230067C0' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -31,13 +34,18 @@
    RESET
 ══════════════════════════════════ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;   /* anchors clear the 56px fixed nav */
+  -webkit-text-size-adjust: 100%;
+}
 body {
   font-family: 'Noto Serif JP', serif;
   background: var(--white);
   color: var(--text);
   line-height: 1.85;
   overflow-x: hidden;
+  overflow-x: clip;        /* keeps sticky header working */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -58,12 +66,18 @@ body.en .pillar-title  { font-family: 'Cormorant Garamond', serif; font-size: 20
 body.en .pillar-body   { font-family: 'Georgia', serif; }
 body.en .pillar-detail { font-family: 'Georgia', serif; }
 body.en .res-title     { font-family: 'Cormorant Garamond', serif; font-size: 22px; }
+body.en .project-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; }
+body.en .project-body  { font-family: 'Georgia', serif; }
+body.en .project-link  { font-family: 'DM Mono', monospace; font-size: 11px; }
 body.en .res-summary-short { font-family: 'Georgia', serif; }
 body.en .res-detail-body { font-family: 'Georgia', serif; font-size: 15px; }
 body.en .res-quote     { font-family: 'Cormorant Garamond', serif; font-size: 17px; }
 body.en .tl-school     { font-family: 'Georgia', serif; }
 body.en .tl-note       { font-family: 'Georgia', serif; }
 body.en .interests h3  { font-family: 'Cormorant Garamond', serif; font-size: 20px; }
+body.en .interest-note { font-family: 'Georgia', serif; }
+body.en .skills h3     { font-family: 'Cormorant Garamond', serif; font-size: 20px; }
+body.en .skill-note    { font-family: 'Georgia', serif; }
 body.en .tag           { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.04em; }
 body.en .hdr-desc      { font-family: 'Georgia', serif; font-size: 15px; }
 body.en .contact-note  { font-family: 'Georgia', serif; }
@@ -84,7 +98,8 @@ body.en .audience-btn  { font-family: 'DM Mono', monospace; font-size: 11px; let
   box-shadow: 0 2px 14px rgba(0,103,192,0.18);
 }
 .lang-btn {
-  padding: 7px 16px;
+  padding: 10px 17px;
+  min-height: 42px;
   background: var(--white);
   border: none;
   cursor: pointer;
@@ -109,6 +124,7 @@ nav {
   display: flex;
   align-items: center;
   background: rgba(10,22,40,0.97);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255,255,255,0.07);
   transform: translateY(-100%);
@@ -134,6 +150,7 @@ nav.visible { transform: translateY(0); }
 ══════════════════════════════════ */
 header {
   min-height: 100vh;
+  min-height: 100svh;      /* iOS: excludes browser chrome */
   display: grid;
   grid-template-columns: 42fr 58fr;
   /* sticky only on desktop — JS applies fade */
@@ -310,12 +327,17 @@ header {
   color: rgba(255,255,255,0.76); line-height: 1.9; font-weight: 300;
 }
 .pillar-detail {
-  margin-top: 14px; display: none;
+  margin-top: 14px; display: block;
   font-family: 'Noto Sans JP', sans-serif; font-size: 13px;
   color: rgba(255,255,255,0.6); line-height: 1.9; font-weight: 300;
   border-top: 1px solid rgba(255,255,255,0.12); padding-top: 12px;
 }
-.pillar:hover .pillar-detail { display: block; }
+/* Reveal-on-hover only where a real pointer exists — touch devices
+   (incl. iPad at desktop widths) always see the detail text. */
+@media (hover: hover) and (pointer: fine) {
+  .pillar-detail { display: none; }
+  .pillar:hover .pillar-detail { display: block; }
+}
 
 /* ══════════════════════════════════
    RESEARCH SECTION
@@ -351,6 +373,50 @@ header {
 }
 
 /* ══════════════════════════════════
+   PROJECTS SECTION
+══════════════════════════════════ */
+.project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.project-card {
+  border: 1px solid var(--ge); background: var(--white);
+  padding: 28px 24px 26px; position: relative;
+  display: flex; flex-direction: column;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.project-link {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+  color: var(--blue); text-decoration: none;
+  border-bottom: 1px solid rgba(0,103,192,0.3); padding-bottom: 2px;
+  align-self: flex-start; transition: border-color 0.2s, opacity 0.2s;
+}
+.project-link:hover { opacity: 0.75; border-bottom-color: var(--blue); }
+.project-link svg { width: 11px; height: 11px; flex-shrink: 0; }
+.project-card::before {
+  content: ''; position: absolute; top: -1px; left: -1px; right: -1px;
+  height: 3px; background: var(--blue); opacity: 0; transition: opacity 0.25s;
+}
+.project-card:hover { border-color: var(--blue-lt); transform: translateY(-3px); box-shadow: 0 6px 24px rgba(10,22,40,0.07); }
+.project-card:hover::before { opacity: 1; }
+.project-type {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 14px;
+}
+.project-title {
+  font-family: 'Noto Serif JP', serif; font-size: 16px; font-weight: 500;
+  color: var(--navy); line-height: 1.7; margin-bottom: 12px;
+}
+.project-body {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 13px; font-weight: 300;
+  color: var(--g6); line-height: 1.9;
+}
+.project-status {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 16px;
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
+  color: var(--g9); text-transform: uppercase; align-self: flex-start;
+}
+.project-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+
+/* ══════════════════════════════════
    PROFILE SECTION
 ══════════════════════════════════ */
 .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
@@ -368,6 +434,11 @@ header {
 .interests h3 { font-family: 'Noto Serif JP', serif; font-size: 15px; color: var(--navy); margin-bottom: 12px; margin-top: 20px; font-weight: 400; }
 .interests h3:first-of-type { margin-top: 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+.skills { margin-top: 40px; }
+.skills h3 { font-family: 'Noto Serif JP', serif; font-size: 15px; color: var(--navy); margin-bottom: 12px; margin-top: 20px; font-weight: 400; }
+.skills h3:first-of-type { margin-top: 0; }
+.skill-note { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; color: var(--g9); font-weight: 300; line-height: 1.85; margin-top: -8px; margin-bottom: 18px; }
+.interest-note { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); font-weight: 300; line-height: 1.9; margin-top: -6px; }
 .tag { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; padding: 5px 13px; border: 1px solid var(--ge); color: var(--g4); font-weight: 300; border-radius: 2px; transition: border-color 0.2s, color 0.2s; cursor: default; }
 .tag:hover { border-color: var(--blue); color: var(--blue); }
 
@@ -429,6 +500,16 @@ header {
 }
 .contact-email:hover { color: var(--blue-lt); border-bottom-color: var(--blue-lt); }
 .contact-note { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; color: rgba(255,255,255,0.7); font-weight: 300; }
+.contact-social { margin-top: 26px; }
+.social-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.5); text-decoration: none;
+  padding: 7px 14px; border: 1px solid rgba(255,255,255,0.14);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.social-link:hover { color: var(--white); border-color: rgba(0,103,192,0.7); background: rgba(0,103,192,0.14); }
+.social-link svg { width: 15px; height: 15px; flex-shrink: 0; }
 
 /* ══════════════════════════════════
    PRIVACY
@@ -455,10 +536,36 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
 .footer-copy { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.18); letter-spacing: 0.08em; }
 
 /* ══════════════════════════════════
+   FOCUS VISIBILITY (keyboard users)
+══════════════════════════════════ */
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+nav a:focus-visible,
+.vision-section a:focus-visible,
+.contact-section a:focus-visible,
+.prof-vision-section a:focus-visible,
+footer a:focus-visible { outline-color: var(--blue-lt); }
+
+/* ══════════════════════════════════
    SCROLL REVEAL
 ══════════════════════════════════ */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ══════════════════════════════════
+   REDUCED MOTION
+══════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
 
 /* ══════════════════════════════════
    RESPONSIVE — TABLET 800px
@@ -470,7 +577,7 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
     grid-template-columns: 1fr;
     min-height: auto;
   }
-  .hdr-left  { padding: 80px 28px 40px; min-height: 50vh; }
+  .hdr-left  { padding: 80px 28px 40px; min-height: 50vh; min-height: 50svh; }
   .hdr-right { padding: 36px 28px 52px; }
 
   /* Pillar numbers slightly smaller but still white */
@@ -481,6 +588,8 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
   .pillar-detail { display: block; } /* always show on mobile, no hover */
 
   .profile-grid { grid-template-columns: 1fr; gap: 36px; }
+  .project-grid { grid-template-columns: 1fr; gap: 14px; }
+  .project-card { padding: 24px 20px; }
 
   .section-inner { padding: 0 24px; }
   .privacy-inner { padding: 0 24px; }
@@ -519,6 +628,10 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
   .pillar-num { font-size: 36px; }
 }
 </style>
+<noscript><style>
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .pillar-detail { display: block !important; }
+</style></noscript>
 </head>
 <body>
 
@@ -534,6 +647,7 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
   <ul class="nav-links">
     <li><a href="#vision"><span class="lang-ja">ビジョン</span><span class="lang-en">Vision</span></a></li>
     <li><a href="#research"><span class="lang-ja">研究</span><span class="lang-en">Research</span></a></li>
+    <li><a href="#projects"><span class="lang-ja">プロジェクト</span><span class="lang-en">Projects</span></a></li>
     <li><a href="#profile"><span class="lang-ja">プロフィール</span><span class="lang-en">Profile</span></a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -557,14 +671,15 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
       <span class="lang-en">Toward the Next-Generation<br>Accounting Professional —<br>Statistics &amp; Machine Learning for Better Decisions.</span>
     </div>
     <div class="hdr-desc">
-      <span class="lang-ja">公認会計士試験合格を視野に、統計・機械学習を武器として会計の専門性をデータサイエンスで拡張する。</span>
-      <span class="lang-en">Targeting CPA qualification while expanding accounting expertise with statistics and machine learning-driven data science.</span>
+      <span class="lang-ja">管理会計ゼミにてDID（差分の差分法）やランダムフォレストを用いた実証研究に取り組みながら、専門性の証明として公認会計士・USCPA試験の合格を目指す。</span>
+      <span class="lang-en">Conducting empirical research in a management accounting seminar using DID and random forests, while pursuing the Japanese CPA and USCPA exams as proof of professional expertise.</span>
     </div>
     <div class="keywords">
       <span class="keyword">Accounting</span>
       <span class="keyword">Data Science</span>
-      <span class="keyword">ICT / Audit Tech</span>
+      <span class="keyword">ICT / Accounting Tech</span>
       <span class="keyword">CPA Candidate</span>
+      <span class="keyword">USCPA Candidate</span>
       <span class="keyword">Causal Inference</span>
       <span class="keyword">Machine Learning</span>
     </div>
@@ -614,12 +729,12 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
           <span class="lang-en">Innovating Accounting Through Technology</span>
         </div>
         <div class="pillar-body">
-          <span class="lang-ja">ICTの進化が監査・会計実務に与える影響を研究し、実務直結のイノベーションを探求する。</span>
-          <span class="lang-en">Researching how ICT reshapes audit and accounting, exploring practical innovations for the profession.</span>
+          <span class="lang-ja">ICTの進化が会計実務・経営管理に与える影響を研究し、実務直結のイノベーションを探求する。</span>
+          <span class="lang-en">Researching how ICT reshapes accounting practice and management, exploring innovations directly applicable to the field.</span>
         </div>
         <div class="pillar-detail">
-          <span class="lang-ja">画像認識技術等を活用した不正検出や業務自動化を構想。会計的知見と技術的知識を融合させた高付加価値なソリューションを目指す。</span>
-          <span class="lang-en">Envisioning fraud detection via image recognition and workflow automation — merging accounting judgment with technical knowledge for high-value solutions.</span>
+          <span class="lang-ja">AI・機械学習を活用した業務自動化や意思決定支援の仕組みを構想し、実際にアプリケーションとして形にする。会計的知見と技術的知識を融合させた高付加価値なソリューションを目指す。</span>
+          <span class="lang-en">Designing AI- and machine learning-driven workflow automation and decision-support systems — and building them into working applications. Merging accounting judgment with technical knowledge for high-value solutions.</span>
         </div>
       </div>
       <div class="pillar reveal">
@@ -633,23 +748,23 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
           <span class="lang-en">Deepening business analytics using statistics and machine learning, building on undergraduate statistical research.</span>
         </div>
         <div class="pillar-detail">
-          <span class="lang-ja">会計専門コースに身を置きつつ、因果推論・統計モデル・機械学習の手法を積極的に習得。財務データの構造を解明し、高精度な意思決定支援ツールの開発を目指す。</span>
-          <span class="lang-en">While grounded in the accounting curriculum, actively developing expertise in causal inference, statistical modeling, and machine learning — aiming to uncover structural patterns in financial data and build high-precision decision-support tools.</span>
+          <span class="lang-ja">会計専門コースに身を置きつつ、因果推論・統計モデル・機械学習の手法を積極的に習得。現在は管理会計ゼミにて、DID（差分の差分法）やランダムフォレストを用いた実証研究に取り組み、管理会計データの構造解明と意思決定支援ツールの開発を目指している。</span>
+          <span class="lang-en">While grounded in the accounting curriculum, actively developing expertise in causal inference, statistical modeling, and machine learning. Currently conducting empirical research in a management accounting seminar using difference-in-differences (DID) and random forests, aiming to uncover structural patterns in management accounting data and build decision-support tools.</span>
         </div>
       </div>
       <div class="pillar reveal">
         <div class="pillar-num">03</div>
         <div class="pillar-title">
-          <span class="lang-ja">公認会計士試験合格 × 実践力の養成</span>
-          <span class="lang-en">CPA Exam Success × Applied Competence</span>
+          <span class="lang-ja">公認会計士・USCPA試験合格 × 実践力の養成</span>
+          <span class="lang-en">CPA &amp; USCPA Exam Success × Applied Competence</span>
         </div>
         <div class="pillar-body">
-          <span class="lang-ja">在学中の公認会計士試験合格を最優先とし、理論と実践の有機的な統合を図る。</span>
-          <span class="lang-en">Prioritizing CPA exam success during graduate study, organically linking theory and practice.</span>
+          <span class="lang-ja">在学中の公認会計士試験・USCPA試験合格を最優先とし、理論と実践の有機的な統合を図る。</span>
+          <span class="lang-en">Prioritizing success in the Japanese CPA and USCPA exams during graduate study, organically linking theory and practice.</span>
         </div>
         <div class="pillar-detail">
-          <span class="lang-ja">単なる試験対策に留まらず、大学院での理論研究と実践的学びを結びつけることで、実務に即応できる高度な応用力を養う。試験合格はスタートライン。</span>
-          <span class="lang-en">Going beyond exam prep — connecting graduate research with practical learning to develop advanced professional judgment. Passing the exam is only the starting line.</span>
+          <span class="lang-ja">単なる試験対策に留まらず、大学院での理論研究と実践的学びを結びつけることで、実務に即応できる高度な応用力を養う。資格取得はゴールではなく、専門性を証明するための手段と位置づけている。</span>
+          <span class="lang-en">Going beyond exam prep — connecting graduate research with practical learning to develop advanced professional judgment. The qualifications themselves are not the goal, but a means of proving professional expertise.</span>
         </div>
       </div>
     </div>
@@ -662,15 +777,30 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
 <!-- ══ RESEARCH ══ -->
 <section class="section" id="research">
   <div class="section-inner">
-    <div class="section-label reveal">Past Research</div>
+    <div class="section-label reveal">Research</div>
     <div class="section-title reveal">
-      <span class="lang-ja">学部での研究</span>
-      <span class="lang-en">Undergraduate Research</span>
+      <span class="lang-ja">研究活動</span>
+      <span class="lang-en">Research</span>
     </div>
     <div class="section-sub reveal">
-      <span class="lang-ja">データと統計で社会現象を計量化する手法を習得した原点。</span>
-      <span class="lang-en">Where I developed the quantitative approach that now drives my work in accounting and data science.</span>
+      <span class="lang-ja">学部で培った統計的アプローチを、大学院では管理会計の実証研究へと発展させている。</span>
+      <span class="lang-en">Building on the quantitative approach developed as an undergraduate, now extended into empirical research in management accounting at graduate school.</span>
     </div>
+    <div class="research-card reveal" style="margin-bottom:28px;">
+      <div class="research-meta">2026– &ensp;／&ensp; Waseda University Graduate School of Accountancy（管理会計ゼミ）</div>
+      <span class="keyword" style="margin-bottom:16px; display:inline-block;">
+        <span class="lang-ja">研究中</span><span class="lang-en">In Progress</span>
+      </span>
+      <div class="res-title">
+        <span class="lang-ja">管理会計における実証分析<br>― DID・ランダムフォレストを用いたアプローチ ―</span>
+        <span class="lang-en">Empirical Analysis in Management Accounting<br>― A DID and Random Forest Approach ―</span>
+      </div>
+      <div class="res-summary-short">
+        <span class="lang-ja">管理会計ゼミに配属され、差分の差分法（DID）やランダムフォレストといった統計・機械学習手法を用いた実証研究に取り組んでいる。テーマは選定中で、現時点では報酬格差や女性管理職比率といった、人的資本に関わる論点を候補としている。</span>
+        <span class="lang-en">Assigned to a management accounting seminar, conducting empirical research with statistical and machine learning methods such as difference-in-differences (DID) and random forests. The topic is still being selected, with current candidates centering on human capital — compensation disparity and the proportion of women in management positions.</span>
+      </div>
+    </div>
+
     <div class="research-card reveal">
       <div class="research-meta">2022–2026 &ensp;／&ensp; Waseda University, Faculty of Human Sciences</div>
       <div class="res-title">
@@ -702,6 +832,86 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
 <!-- divider -->
 <div class="section-divider"></div>
 
+<!-- ══ PROJECTS ══ -->
+<section class="section" id="projects">
+  <div class="section-inner">
+    <div class="section-label reveal">Projects</div>
+    <div class="section-title reveal">
+      <span class="lang-ja">プロジェクト・制作物</span>
+      <span class="lang-en">Projects &amp; Work</span>
+    </div>
+    <div class="section-sub reveal">
+      <span class="lang-ja">研究と資格取得と並行して、アイデアを形にし、公開し、使われるところまで届ける取り組みにも挑戦している。</span>
+      <span class="lang-en">Alongside research and professional qualifications, turning ideas into tools that ship and get used.</span>
+    </div>
+    <div class="project-grid">
+      <div class="project-card reveal">
+        <div class="project-type">Released</div>
+        <div class="project-title">
+          <span class="lang-ja">学習管理アプリ「復習マネージャー」</span>
+          <span class="lang-en">&ldquo;Review Manager&rdquo; — Study Habit App</span>
+        </div>
+        <div class="project-body">
+          <span class="lang-ja">勉強習慣を作るためのノウハウを詰め込んだ学習管理アプリ。「復習・計画・ToDo」の3種類のタスクを組み合わせ、忘却に抗う復習間隔の設計と勉強時間の記録を一体で管理できる。公開後も継続的に改良を重ねている。</span>
+          <span class="lang-en">A study management app built around the practices that actually sustain a learning habit. It combines three task types — review, plan, and to-do — linking spaced review intervals with study-time tracking. Continuously improved since release.</span>
+        </div>
+        <a href="https://takuto-yamamoto.github.io/review.log/" class="project-link" target="_blank" rel="noopener">
+          <span class="lang-ja">アプリを見る</span><span class="lang-en">View the app</span>
+          <svg viewBox="0 0 12 12" fill="none"><path d="M3 9l6-6M4.5 3H9v4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="project-status">
+          <span class="lang-ja">公開中 / 更新継続中</span><span class="lang-en">Live / Actively Maintained</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-type">Development</div>
+        <div class="project-title">
+          <span class="lang-ja">在宅介護支援アプリ「Carendy」</span>
+          <span class="lang-en">&ldquo;Carendy&rdquo; — Home Care Support App</span>
+        </div>
+        <div class="project-body">
+          <span class="lang-ja">在宅介護に必要な機能を一つにまとめ、「これさえあれば回る」状態を目指すアプリケーション「Carendy」を開発中。複数のツールに分散しがちな記録・管理を集約し、介護を担う人々の日常的な負担に応える仕組みづくりを目指す。</span>
+          <span class="lang-en">Developing &ldquo;Carendy,&rdquo; an application that consolidates everything home caregiving requires into a single place. By bringing together records and routines that are usually scattered across separate tools, it aims to ease the everyday load carried by caregivers.</span>
+        </div>
+        <div class="project-status">
+          <span class="lang-ja">開発中</span><span class="lang-en">In Development</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-type">Hackathon</div>
+        <div class="project-title">
+          <span class="lang-ja">防災アプリ「ココリス」<br>― 東京都AIハッカソン ―</span>
+          <span class="lang-en">&ldquo;Cocoris&rdquo; — Disaster Preparedness App<br>― Tokyo Metropolitan AI Hackathon ―</span>
+        </div>
+        <div class="project-body">
+          <span class="lang-ja">東京都主催のAIハッカソンに参加し、Googleタイムプラスを活用した防災アプリ「ココリス」を提案。AIを用いて災害時の備えと行動を支える仕組みづくりに取り組んでいる。</span>
+          <span class="lang-en">Participating in the AI hackathon hosted by the Tokyo Metropolitan Government with &ldquo;Cocoris,&rdquo; a disaster preparedness app built on Google Time Plus — using AI to support readiness and decision-making in emergencies.</span>
+        </div>
+        <div class="project-status">
+          <span class="lang-ja">2026年8月〜 / 審査中</span><span class="lang-en">Aug 2026– / Under Review</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-type">Patent</div>
+        <div class="project-title">
+          <span class="lang-ja">ガムに関する新アイデアの特許取得</span>
+          <span class="lang-en">Patent Application for a New Chewing Gum Concept</span>
+        </div>
+        <div class="project-body">
+          <span class="lang-ja">日常的な製品に着目した新しいアイデアについて、特許取得に向けた準備を進めている。詳細は出願の都合により非公開。</span>
+          <span class="lang-en">Preparing a patent application for a new concept built around an everyday product. Details withheld pending filing.</span>
+        </div>
+        <div class="project-status">
+          <span class="lang-ja">出願準備中</span><span class="lang-en">In Preparation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- divider -->
+<div class="section-divider"></div>
+
 <!-- ══ PROFILE ══ -->
 <section class="section" id="profile" style="background:var(--offwhite)">
   <div class="section-inner">
@@ -721,8 +931,8 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
               <span class="lang-en">Waseda University Graduate School of Accountancy<br>Master of Professional Accountancy (current)</span>
             </div>
             <div class="tl-note">
-              <span class="lang-ja">公認会計士試験勉強中 / 統計・機械学習も研究</span>
-              <span class="lang-en">Preparing for CPA exam / Research in statistics &amp; machine learning</span>
+              <span class="lang-ja">管理会計ゼミ配属 / 公認会計士・USCPA試験勉強中</span>
+              <span class="lang-en">Assigned to Management Accounting Seminar / Preparing for CPA &amp; USCPA exams</span>
             </div>
           </div>
         </div>
@@ -752,6 +962,27 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
             </div>
           </div>
         </div>
+        <div class="skills">
+          <div class="col-label"><span class="lang-ja">スキル・使用ツール</span><span class="lang-en">Skills &amp; Tools</span></div>
+          <h3><span class="lang-ja">統計解析</span><span class="lang-en">Statistical Analysis</span></h3>
+          <div class="tags">
+            <span class="tag">R</span>
+            <span class="tag">SPSS</span>
+          </div>
+          <p class="skill-note">
+            <span class="lang-ja">重回帰分析・因果推論（DID）・ランダムフォレスト等を自ら記述して実行。</span>
+            <span class="lang-en">Writing and running multiple regression, causal inference (DID), and random forest models directly.</span>
+          </p>
+          <h3><span class="lang-ja">開発</span><span class="lang-en">Development</span></h3>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <p class="skill-note">
+            <span class="lang-ja">AIを活用した開発により、設計から実装・公開までを一人で完結。</span>
+            <span class="lang-en">Building with AI-assisted development — handling design, implementation, and release end to end.</span>
+          </p>
+        </div>
       </div>
 
       <div class="interests reveal">
@@ -759,18 +990,35 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
         <h3><span class="lang-ja">興味・関心領域</span><span class="lang-en">Areas of Interest</span></h3>
         <div class="tags">
           <span class="tag lang-ja">会計学</span><span class="tag lang-en">Accounting</span>
+          <span class="tag lang-ja">管理会計</span><span class="tag lang-en">Management Accounting</span>
           <span class="tag lang-ja">統計学</span><span class="tag lang-en">Statistics</span>
           <span class="tag lang-ja">コンピュータサイエンス</span><span class="tag lang-en">Computer Science</span>
           <span class="tag lang-ja">社会学</span><span class="tag lang-en">Sociology</span>
           <span class="tag lang-ja">ビジネスアナリティクス</span><span class="tag lang-en">Business Analytics</span>
-          <span class="tag lang-ja">監査・リスク管理</span><span class="tag lang-en">Audit &amp; Risk</span>
+          <span class="tag lang-ja">AI・アプリケーション開発</span><span class="tag lang-en">AI &amp; App Development</span>
         </div>
         <h3><span class="lang-ja">現在取り組んでいること</span><span class="lang-en">Currently</span></h3>
         <div class="tags">
           <span class="tag lang-ja">公認会計士試験勉強中</span><span class="tag lang-en">Preparing for CPA Exam</span>
-          <span class="tag lang-ja">因果推論</span><span class="tag lang-en">Causal Inference</span>
-          <span class="tag lang-ja">機械学習</span><span class="tag lang-en">Machine Learning</span>
+          <span class="tag lang-ja">USCPA試験勉強中</span><span class="tag lang-en">Preparing for USCPA Exam</span>
+          <span class="tag lang-ja">因果推論（DID）</span><span class="tag lang-en">Causal Inference (DID)</span>
+          <span class="tag lang-ja">機械学習（ランダムフォレスト）</span><span class="tag lang-en">Machine Learning (Random Forest)</span>
         </div>
+        <h3><span class="lang-ja">今後の関心領域</span><span class="lang-en">Looking Ahead</span></h3>
+        <p class="interest-note">
+          <span class="lang-ja">企業価値評価や経営管理など、会計の専門性とデータ分析の双方が求められる領域に関心がある。数字の背後にある構造を読み解き、意思決定の精度を高める仕事に携わりたい。</span>
+          <span class="lang-en">Drawn to areas where accounting expertise and data analysis are both essential — such as corporate valuation and management control. Interested in work that reads the structure behind the numbers and sharpens the quality of decisions.</span>
+        </p>
+        <h3><span class="lang-ja">趣味</span><span class="lang-en">Off Hours</span></h3>
+        <div class="tags">
+          <span class="tag lang-ja">サウナ</span><span class="tag lang-en">Sauna</span>
+          <span class="tag lang-ja">グラフを眺める</span><span class="tag lang-en">Looking at Graphs</span>
+          <span class="tag lang-ja">料理（イタリアン）</span><span class="tag lang-en">Cooking (Italian)</span>
+        </div>
+        <p class="interest-note">
+          <span class="lang-ja">逆U字のグラフや、漸近線のあるグラフを眺めているときがいちばん落ち着く。</span>
+          <span class="lang-en">Nothing settles the mind quite like an inverted-U curve, or a graph with a clean asymptote.</span>
+        </p>
       </div>
     </div>
   </div>
@@ -785,7 +1033,7 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
     </div>
     <div class="prof-vision-quote">&ldquo;</div>
     <p class="prof-vision-text">
-      <span class="lang-ja">会計の専門性にテクノロジーの翼を授け、<br>複雑化する現代社会の意思決定を支える<br>価値ある会計人へ。</span>
+      <span class="lang-ja">会計の専門性にテクノロジーの翼を授け、<br>複雑化する現代社会の意思決定を支える<br>価値ある専門家へ。</span>
       <span class="lang-en">Empowering accounting with the wings of technology —<br>to become a trusted professional who supports<br>critical decisions in an increasingly complex world.</span>
     </p>
     <div class="prof-vision-name">
@@ -805,6 +1053,12 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
     <span class="lang-ja">お気軽にご連絡ください</span>
     <span class="lang-en">Feel free to reach out</span>
   </p>
+  <div class="contact-social">
+    <a href="https://github.com/takuto-yamamoto" class="social-link" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      github.com/takuto-yamamoto
+    </a>
+  </div>
 </section>
 
 <!-- ══ PRIVACY ══ -->
@@ -813,8 +1067,8 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
     <details>
       <summary><span class="lang-ja">プライバシーポリシー</span><span class="lang-en">Privacy Policy</span></summary>
       <div class="privacy-body">
-        <span class="lang-ja">本サイトは山本卓立の個人ホームページです。お問い合わせの際にいただいた個人情報は返信目的のみに使用し、第三者に提供することはありません。本サイトはGoogle Fontsを利用しており、アクセス解析ツールは使用していません。最終更新：2026年4月</span>
-        <span class="lang-en">This is the personal website of Yamamoto Takuto. Personal information provided through contact is used solely for correspondence and will not be shared with third parties. This site uses Google Fonts. No analytics tools are used. Last updated: April 2026</span>
+        <span class="lang-ja">本サイトは山本卓立の個人ホームページです。お問い合わせの際にいただいた個人情報は返信目的のみに使用し、第三者に提供することはありません。本サイトはGoogle Fontsを利用しており、アクセス解析ツールは使用していません。最終更新：2026年9月13日</span>
+        <span class="lang-en">This is the personal website of Yamamoto Takuto. Personal information provided through contact is used solely for correspondence and will not be shared with third parties. This site uses Google Fonts. No analytics tools are used. Last updated: September 13, 2026</span>
       </div>
     </details>
   </div>
@@ -823,7 +1077,7 @@ footer { padding: 24px 52px; background: var(--navy); display: flex; justify-con
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-name">YAMAMOTO TAKUTO</div>
-  <div class="footer-copy">© 2026 Yamamoto Takuto. All rights reserved.</div>
+  <div class="footer-copy">© 2026 Yamamoto Takuto. &ensp;/&ensp; Last updated 2026.09.13</div>
 </footer>
 
 </div><!-- /page-body -->
@@ -886,6 +1140,10 @@ function toggleRes() {
   try {
     var els = document.querySelectorAll('.reveal');
     if (!els.length) return;
+    if (!('IntersectionObserver' in window)) {
+      for (var n = 0; n < els.length; n++) els[n].classList.add('visible');
+      return;
+    }
     var obs = new IntersectionObserver(function (entries) {
       for (var i = 0; i < entries.length; i++) {
         var e = entries[i];
@@ -901,7 +1159,12 @@ function toggleRes() {
       }
     }, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
     for (var j = 0; j < els.length; j++) obs.observe(els[j]);
-  } catch(e) { console.error('reveal', e); }
+  } catch(e) {
+    console.error('reveal', e);
+    /* Fail open: never leave content permanently invisible. */
+    var all = document.querySelectorAll('.reveal');
+    for (var k = 0; k < all.length; k++) all[k].classList.add('visible');
+  }
 }());
 </script>
 </body>
