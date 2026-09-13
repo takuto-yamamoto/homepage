@@ -35,8 +35,9 @@
 ══════════════════════════════════ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 72px;   /* anchors clear the 56px fixed nav */
+  /* Duration is controlled in JS (see SMOOTH ANCHOR SCROLL) so the
+     travel reads as movement rather than a jump-cut. */
+  scroll-padding-top: 72px;   /* fallback for no-JS anchor landing */
   -webkit-text-size-adjust: 100%;
 }
 body {
@@ -98,8 +99,8 @@ body.en .audience-btn  { font-family: 'DM Mono', monospace; font-size: 11px; let
   box-shadow: 0 2px 14px rgba(0,103,192,0.18);
 }
 .lang-btn {
-  padding: 10px 17px;
-  min-height: 42px;
+  padding: 7px 14px;
+  min-height: 36px;
   background: var(--white);
   border: none;
   cursor: pointer;
@@ -135,12 +136,14 @@ nav.visible { transform: translateY(0); }
   font-family: 'Cormorant Garamond', serif;
   font-size: 15px; color: rgba(255,255,255,0.6);
   letter-spacing: 0.2em; flex: 1;
+  white-space: nowrap; overflow: hidden;
 }
 .nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
 .nav-links a {
   font-family: 'DM Mono', monospace; font-size: 11px;
-  letter-spacing: 0.1em; color: rgba(255,255,255,0.45);
+  letter-spacing: 0.1em; color: rgba(255,255,255,0.75);
   text-decoration: none; text-transform: uppercase;
+  white-space: nowrap;
   transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--white); }
@@ -261,6 +264,9 @@ header {
   box-shadow: 0 -12px 48px rgba(0,0,0,0.22);
 }
 
+/* headings carry class-based sizing only */
+h1, h2, h3 { font-size: inherit; font-weight: inherit; }
+
 /* ══════════════════════════════════
    SECTION DIVIDERS
 ══════════════════════════════════ */
@@ -350,7 +356,7 @@ header {
   content: ''; position: absolute; top: 0; left: 0;
   width: 4px; height: 100%; background: var(--blue);
 }
-.research-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--g9); letter-spacing: 0.1em; margin-bottom: 14px; }
+.research-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--g6); letter-spacing: 0.1em; margin-bottom: 14px; }
 .res-title { font-family: 'Noto Serif JP', serif; font-size: 18px; color: var(--navy); margin-bottom: 18px; line-height: 1.75; font-weight: 500; }
 .res-summary-short { font-family: 'Noto Sans JP', sans-serif; font-size: 16px; color: var(--g4); line-height: 1.9; font-weight: 300; margin-bottom: 16px; }
 .res-detail { display: none; }
@@ -412,7 +418,7 @@ header {
 .project-status {
   display: inline-flex; align-items: center; gap: 7px; margin-top: 16px;
   font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
-  color: var(--g9); text-transform: uppercase; align-self: flex-start;
+  color: var(--g6); text-transform: uppercase; align-self: flex-start;
 }
 .project-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
 
@@ -430,14 +436,25 @@ header {
 .tl-content { border-left: 1px solid var(--ge); padding-left: 18px; padding-bottom: 18px; position: relative; }
 .tl-content::before { content: ''; position: absolute; left: -4.5px; top: 8px; width: 8px; height: 8px; background: var(--blue); border-radius: 50%; }
 .tl-school { font-family: 'Noto Sans JP', sans-serif; font-size: 16px; color: var(--navy); font-weight: 400; line-height: 1.7; }
-.tl-note { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; color: var(--g9); font-weight: 300; margin-top: 3px; }
+.tl-note { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); font-weight: 300; margin-top: 3px; }
 .interests h3 { font-family: 'Noto Serif JP', serif; font-size: 15px; color: var(--navy); margin-bottom: 12px; margin-top: 20px; font-weight: 400; }
 .interests h3:first-of-type { margin-top: 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
 .skills { margin-top: 40px; }
 .skills h3 { font-family: 'Noto Serif JP', serif; font-size: 15px; color: var(--navy); margin-bottom: 12px; margin-top: 20px; font-weight: 400; }
 .skills h3:first-of-type { margin-top: 0; }
-.skill-note { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; color: var(--g9); font-weight: 300; line-height: 1.85; margin-top: -8px; margin-bottom: 18px; }
+.skill-note { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); font-weight: 300; line-height: 1.85; margin-top: -8px; margin-bottom: 18px; }
+.hobby-list { margin-top: 2px; }
+.hobby-item {
+  display: grid; grid-template-columns: 72px 1fr; gap: 14px;
+  padding: 11px 0; border-bottom: 1px solid var(--ge);
+}
+.hobby-item:last-child { border-bottom: none; }
+.hobby-label { font-family: 'Noto Serif JP', serif; font-size: 14px; color: var(--navy); font-weight: 400; }
+.hobby-text  { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); font-weight: 300; line-height: 1.85; }
+body.en .hobby-item  { grid-template-columns: 92px 1fr; }
+body.en .hobby-label { font-family: 'Cormorant Garamond', serif; font-size: 17px; }
+body.en .hobby-text  { font-family: 'Georgia', serif; }
 .interest-note { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); font-weight: 300; line-height: 1.9; margin-top: -6px; }
 .tag { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; padding: 5px 13px; border: 1px solid var(--ge); color: var(--g4); font-weight: 300; border-radius: 2px; transition: border-color 0.2s, color 0.2s; cursor: default; }
 .tag:hover { border-color: var(--blue); color: var(--blue); }
@@ -526,14 +543,14 @@ summary {
 summary::-webkit-details-marker { display: none; }
 summary::before { content: '+'; font-size: 14px; color: var(--blue); transition: transform 0.2s; display: inline-block; line-height: 1; }
 details[open] summary::before { transform: rotate(45deg); }
-.privacy-body { padding: 20px 24px; font-family: 'Noto Sans JP', sans-serif; font-size: 12px; color: var(--g9); line-height: 2; font-weight: 300; border-top: 1px solid var(--ge); }
+.privacy-body { padding: 20px 24px; font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); line-height: 2; font-weight: 300; border-top: 1px solid var(--ge); }
 
 /* ══════════════════════════════════
    FOOTER
 ══════════════════════════════════ */
 footer { padding: 24px 52px; background: var(--navy); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); }
 .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: rgba(255,255,255,0.3); letter-spacing: 0.22em; }
-.footer-copy { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.18); letter-spacing: 0.08em; }
+.footer-copy { font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; }
 
 /* ══════════════════════════════════
    FOCUS VISIBILITY (keyboard users)
@@ -595,10 +612,14 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
   .privacy-inner { padding: 0 24px; }
   .section { padding: 56px 0; }
 
-  .lang-toggle { top: 62px; right: 16px; }
-  nav { padding: 0 20px; }
-  .nav-links { gap: 16px; }
-  .nav-links a { font-size: 10px; letter-spacing: 0.07em; }
+  .lang-toggle { top: 60px; right: 14px; }
+  .lang-btn { padding: 5px 11px; min-height: 30px; font-size: 11px; letter-spacing: 0.08em; }
+  nav { padding: 0 16px; }
+  /* The name wrapped onto two lines and pushed the links out of shape —
+     on phones the links alone are enough. */
+  .nav-name { display: none; }
+  .nav-links { gap: 0; width: 100%; justify-content: space-between; flex-wrap: nowrap; }
+  .nav-links a { font-size: 11px; letter-spacing: 0.02em; }
 
   .research-card { padding: 24px 20px; }
   .res-detail { display: block; }
@@ -637,8 +658,8 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
 
 <!-- LANG TOGGLE -->
 <div class="lang-toggle">
-  <button class="lang-btn active" onclick="setLang('ja')">JA</button>
-  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn active" onclick="setLang('ja')" lang="ja" aria-label="日本語で表示">JA</button>
+  <button class="lang-btn" onclick="setLang('en')" lang="en" aria-label="View in English">EN</button>
 </div>
 
 <!-- NAV -->
@@ -656,7 +677,7 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
 <!-- ══ HERO ══ -->
 <header id="top">
   <div class="hdr-left" id="hdrLeft">
-    <div class="name-ja">山本 卓立</div>
+    <h1 class="name-ja">山本 卓立</h1>
     <div class="name-en">YAMAMOTO TAKUTO</div>
     <div class="hdr-line"></div>
     <div class="hdr-tagline">
@@ -677,9 +698,7 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
     <div class="keywords">
       <span class="keyword">Accounting</span>
       <span class="keyword">Data Science</span>
-      <span class="keyword">ICT / Accounting Tech</span>
-      <span class="keyword">CPA Candidate</span>
-      <span class="keyword">USCPA Candidate</span>
+      <span class="keyword">CPA / USCPA Candidate</span>
       <span class="keyword">Causal Inference</span>
       <span class="keyword">Machine Learning</span>
     </div>
@@ -713,10 +732,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
 <section class="vision-section" id="vision">
   <div class="section-inner">
     <div class="section-label">Vision</div>
-    <div class="section-title reveal">
+    <h2 class="section-title reveal">
       <span class="lang-ja">大学院で成し遂げたいこと</span>
       <span class="lang-en">What I Aim to Achieve in Graduate School</span>
-    </div>
+    </h2>
     <div class="section-sub reveal">
       <span class="lang-ja">会計を軸に、ICTとデータで意思決定を支える専門性を構築する。3つの柱に集約した行動指針。</span>
       <span class="lang-en">Building expertise that supports decision-making through accounting, ICT, and data — three core pillars.</span>
@@ -724,10 +743,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
     <div class="pillars">
       <div class="pillar reveal">
         <div class="pillar-num">01</div>
-        <div class="pillar-title">
+        <h3 class="pillar-title">
           <span class="lang-ja">テクノロジーによる会計の革新</span>
           <span class="lang-en">Innovating Accounting Through Technology</span>
-        </div>
+        </h3>
         <div class="pillar-body">
           <span class="lang-ja">ICTの進化が会計実務・経営管理に与える影響を研究し、実務直結のイノベーションを探求する。</span>
           <span class="lang-en">Researching how ICT reshapes accounting practice and management, exploring innovations directly applicable to the field.</span>
@@ -739,10 +758,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
       </div>
       <div class="pillar reveal">
         <div class="pillar-num">02</div>
-        <div class="pillar-title">
+        <h3 class="pillar-title">
           <span class="lang-ja">データ駆動型アプローチ × 統計・機械学習</span>
           <span class="lang-en">Data-Driven Approach × Statistics &amp; Machine Learning</span>
-        </div>
+        </h3>
         <div class="pillar-body">
           <span class="lang-ja">学部の統計分析経験を活かし、統計・機械学習を用いたビジネスアナリティクスを深化させる。</span>
           <span class="lang-en">Deepening business analytics using statistics and machine learning, building on undergraduate statistical research.</span>
@@ -754,10 +773,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
       </div>
       <div class="pillar reveal">
         <div class="pillar-num">03</div>
-        <div class="pillar-title">
+        <h3 class="pillar-title">
           <span class="lang-ja">公認会計士・USCPA試験合格 × 実践力の養成</span>
           <span class="lang-en">CPA &amp; USCPA Exam Success × Applied Competence</span>
-        </div>
+        </h3>
         <div class="pillar-body">
           <span class="lang-ja">在学中の公認会計士試験・USCPA試験合格を最優先とし、理論と実践の有機的な統合を図る。</span>
           <span class="lang-en">Prioritizing success in the Japanese CPA and USCPA exams during graduate study, organically linking theory and practice.</span>
@@ -778,10 +797,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
 <section class="section" id="research">
   <div class="section-inner">
     <div class="section-label reveal">Research</div>
-    <div class="section-title reveal">
+    <h2 class="section-title reveal">
       <span class="lang-ja">研究活動</span>
       <span class="lang-en">Research</span>
-    </div>
+    </h2>
     <div class="section-sub reveal">
       <span class="lang-ja">学部で培った統計的アプローチを、大学院では管理会計の実証研究へと発展させている。</span>
       <span class="lang-en">Building on the quantitative approach developed as an undergraduate, now extended into empirical research in management accounting at graduate school.</span>
@@ -791,10 +810,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
       <span class="keyword" style="margin-bottom:16px; display:inline-block;">
         <span class="lang-ja">研究中</span><span class="lang-en">In Progress</span>
       </span>
-      <div class="res-title">
+      <h3 class="res-title">
         <span class="lang-ja">管理会計における実証分析<br>― DID・ランダムフォレストを用いたアプローチ ―</span>
         <span class="lang-en">Empirical Analysis in Management Accounting<br>― A DID and Random Forest Approach ―</span>
-      </div>
+      </h3>
       <div class="res-summary-short">
         <span class="lang-ja">管理会計ゼミに配属され、差分の差分法（DID）やランダムフォレストといった統計・機械学習手法を用いた実証研究に取り組んでいる。テーマは選定中で、現時点では報酬格差や女性管理職比率といった、人的資本に関わる論点を候補としている。</span>
         <span class="lang-en">Assigned to a management accounting seminar, conducting empirical research with statistical and machine learning methods such as difference-in-differences (DID) and random forests. The topic is still being selected, with current candidates centering on human capital — compensation disparity and the proportion of women in management positions.</span>
@@ -803,10 +822,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
 
     <div class="research-card reveal">
       <div class="research-meta">2022–2026 &ensp;／&ensp; Waseda University, Faculty of Human Sciences</div>
-      <div class="res-title">
+      <h3 class="res-title">
         <span class="lang-ja">学校外教育費支出の規定要因<br>― 中学生の塾代に対する保護者要因の統計的検証 ―</span>
         <span class="lang-en">Determinants of Out-of-School Education Expenditure<br>― A Statistical Examination of Parental Factors ―</span>
-      </div>
+      </h3>
       <div class="res-summary-short">
         <span class="lang-ja">SSM調査2015年データ（688世帯）を用いた重回帰分析により、塾代格差の構造的要因を解明。世帯年収・親の学歴に加え、保護者の「教育熱意」や「通塾経験」が独立した影響を持つことを統計的に検証した。</span>
         <span class="lang-en">Using SSM Survey 2015 data (688 households) and multiple regression analysis, this study revealed structural drivers of private tutoring expenditure — identifying household income, parental education, and parental attitudes as independent predictors.</span>
@@ -836,10 +855,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
 <section class="section" id="projects">
   <div class="section-inner">
     <div class="section-label reveal">Projects</div>
-    <div class="section-title reveal">
+    <h2 class="section-title reveal">
       <span class="lang-ja">プロジェクト・制作物</span>
       <span class="lang-en">Projects &amp; Work</span>
-    </div>
+    </h2>
     <div class="section-sub reveal">
       <span class="lang-ja">研究と資格取得と並行して、アイデアを形にし、公開し、使われるところまで届ける取り組みにも挑戦している。</span>
       <span class="lang-en">Alongside research and professional qualifications, turning ideas into tools that ship and get used.</span>
@@ -847,10 +866,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
     <div class="project-grid">
       <div class="project-card reveal">
         <div class="project-type">Released</div>
-        <div class="project-title">
+        <h3 class="project-title">
           <span class="lang-ja">学習管理アプリ「復習マネージャー」</span>
           <span class="lang-en">&ldquo;Review Manager&rdquo; — Study Habit App</span>
-        </div>
+        </h3>
         <div class="project-body">
           <span class="lang-ja">勉強習慣を作るためのノウハウを詰め込んだ学習管理アプリ。「復習・計画・ToDo」の3種類のタスクを組み合わせ、忘却に抗う復習間隔の設計と勉強時間の記録を一体で管理できる。公開後も継続的に改良を重ねている。</span>
           <span class="lang-en">A study management app built around the practices that actually sustain a learning habit. It combines three task types — review, plan, and to-do — linking spaced review intervals with study-time tracking. Continuously improved since release.</span>
@@ -865,10 +884,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
       </div>
       <div class="project-card reveal">
         <div class="project-type">Development</div>
-        <div class="project-title">
+        <h3 class="project-title">
           <span class="lang-ja">在宅介護支援アプリ「Carendy」</span>
           <span class="lang-en">&ldquo;Carendy&rdquo; — Home Care Support App</span>
-        </div>
+        </h3>
         <div class="project-body">
           <span class="lang-ja">在宅介護に必要な機能を一つにまとめ、「これさえあれば回る」状態を目指すアプリケーション「Carendy」を開発中。複数のツールに分散しがちな記録・管理を集約し、介護を担う人々の日常的な負担に応える仕組みづくりを目指す。</span>
           <span class="lang-en">Developing &ldquo;Carendy,&rdquo; an application that consolidates everything home caregiving requires into a single place. By bringing together records and routines that are usually scattered across separate tools, it aims to ease the everyday load carried by caregivers.</span>
@@ -879,10 +898,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
       </div>
       <div class="project-card reveal">
         <div class="project-type">Hackathon</div>
-        <div class="project-title">
+        <h3 class="project-title">
           <span class="lang-ja">防災アプリ「ココリス」<br>― 東京都AIハッカソン ―</span>
           <span class="lang-en">&ldquo;Cocoris&rdquo; — Disaster Preparedness App<br>― Tokyo Metropolitan AI Hackathon ―</span>
-        </div>
+        </h3>
         <div class="project-body">
           <span class="lang-ja">東京都主催のAIハッカソンに参加し、Googleタイムプラスを活用した防災アプリ「ココリス」を提案。AIを用いて災害時の備えと行動を支える仕組みづくりに取り組んでいる。</span>
           <span class="lang-en">Participating in the AI hackathon hosted by the Tokyo Metropolitan Government with &ldquo;Cocoris,&rdquo; a disaster preparedness app built on Google Time Plus — using AI to support readiness and decision-making in emergencies.</span>
@@ -893,10 +912,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
       </div>
       <div class="project-card reveal">
         <div class="project-type">Patent</div>
-        <div class="project-title">
+        <h3 class="project-title">
           <span class="lang-ja">ガムに関する新アイデアの特許取得</span>
           <span class="lang-en">Patent Application for a New Chewing Gum Concept</span>
-        </div>
+        </h3>
         <div class="project-body">
           <span class="lang-ja">日常的な製品に着目した新しいアイデアについて、特許取得に向けた準備を進めている。詳細は出願の都合により非公開。</span>
           <span class="lang-en">Preparing a patent application for a new concept built around an everyday product. Details withheld pending filing.</span>
@@ -916,10 +935,10 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
 <section class="section" id="profile" style="background:var(--offwhite)">
   <div class="section-inner">
     <div class="section-label reveal">Profile</div>
-    <div class="section-title reveal">
+    <h2 class="section-title reveal">
       <span class="lang-ja">経歴と関心領域</span>
       <span class="lang-en">Background &amp; Interests</span>
-    </div>
+    </h2>
     <div class="profile-grid">
       <div class="reveal">
         <div class="col-label"><span class="lang-ja">学歴</span><span class="lang-en">Education</span></div>
@@ -963,7 +982,7 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
           </div>
         </div>
         <div class="skills">
-          <div class="col-label"><span class="lang-ja">スキル・使用ツール</span><span class="lang-en">Skills &amp; Tools</span></div>
+          <div class="col-label"><span class="lang-ja">スキル・関心領域</span><span class="lang-en">Skills &amp; Interests</span></div>
           <h3><span class="lang-ja">統計解析</span><span class="lang-en">Statistical Analysis</span></h3>
           <div class="tags">
             <span class="tag">R</span>
@@ -982,25 +1001,25 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
             <span class="lang-ja">AIを活用した開発により、設計から実装・公開までを一人で完結。</span>
             <span class="lang-en">Building with AI-assisted development — handling design, implementation, and release end to end.</span>
           </p>
+          <h3><span class="lang-ja">興味・関心領域</span><span class="lang-en">Areas of Interest</span></h3>
+          <div class="tags" style="margin-bottom:0;">
+            <span class="tag lang-ja">会計学</span><span class="tag lang-en">Accounting</span>
+            <span class="tag lang-ja">管理会計</span><span class="tag lang-en">Management Accounting</span>
+            <span class="tag lang-ja">統計学</span><span class="tag lang-en">Statistics</span>
+            <span class="tag lang-ja">コンピュータサイエンス</span><span class="tag lang-en">Computer Science</span>
+            <span class="tag lang-ja">社会学</span><span class="tag lang-en">Sociology</span>
+            <span class="tag lang-ja">ビジネスアナリティクス</span><span class="tag lang-en">Business Analytics</span>
+            <span class="tag lang-ja">AI・アプリケーション開発</span><span class="tag lang-en">AI &amp; App Development</span>
+          </div>
         </div>
       </div>
 
       <div class="interests reveal">
-        <div class="col-label"><span class="lang-ja">関心・現在</span><span class="lang-en">Interests &amp; Now</span></div>
-        <h3><span class="lang-ja">興味・関心領域</span><span class="lang-en">Areas of Interest</span></h3>
-        <div class="tags">
-          <span class="tag lang-ja">会計学</span><span class="tag lang-en">Accounting</span>
-          <span class="tag lang-ja">管理会計</span><span class="tag lang-en">Management Accounting</span>
-          <span class="tag lang-ja">統計学</span><span class="tag lang-en">Statistics</span>
-          <span class="tag lang-ja">コンピュータサイエンス</span><span class="tag lang-en">Computer Science</span>
-          <span class="tag lang-ja">社会学</span><span class="tag lang-en">Sociology</span>
-          <span class="tag lang-ja">ビジネスアナリティクス</span><span class="tag lang-en">Business Analytics</span>
-          <span class="tag lang-ja">AI・アプリケーション開発</span><span class="tag lang-en">AI &amp; App Development</span>
-        </div>
+        <div class="col-label"><span class="lang-ja">現在、そしてこれから</span><span class="lang-en">Now &amp; Next</span></div>
         <h3><span class="lang-ja">現在取り組んでいること</span><span class="lang-en">Currently</span></h3>
         <div class="tags">
-          <span class="tag lang-ja">公認会計士試験勉強中</span><span class="tag lang-en">Preparing for CPA Exam</span>
-          <span class="tag lang-ja">USCPA試験勉強中</span><span class="tag lang-en">Preparing for USCPA Exam</span>
+          <span class="tag lang-ja">公認会計士試験</span><span class="tag lang-en">CPA Exam</span>
+          <span class="tag lang-ja">USCPA試験</span><span class="tag lang-en">USCPA Exam</span>
           <span class="tag lang-ja">因果推論（DID）</span><span class="tag lang-en">Causal Inference (DID)</span>
           <span class="tag lang-ja">機械学習（ランダムフォレスト）</span><span class="tag lang-en">Machine Learning (Random Forest)</span>
         </div>
@@ -1010,15 +1029,29 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
           <span class="lang-en">Drawn to areas where accounting expertise and data analysis are both essential — such as corporate valuation and management control. Interested in work that reads the structure behind the numbers and sharpens the quality of decisions.</span>
         </p>
         <h3><span class="lang-ja">趣味</span><span class="lang-en">Off Hours</span></h3>
-        <div class="tags">
-          <span class="tag lang-ja">サウナ</span><span class="tag lang-en">Sauna</span>
-          <span class="tag lang-ja">グラフを眺める</span><span class="tag lang-en">Looking at Graphs</span>
-          <span class="tag lang-ja">料理（イタリアン）</span><span class="tag lang-en">Cooking (Italian)</span>
+        <div class="hobby-list">
+          <div class="hobby-item">
+            <div class="hobby-label"><span class="lang-ja">サウナ</span><span class="lang-en">Sauna</span></div>
+            <div class="hobby-text">
+              <span class="lang-ja">月に1度ほど、整いに行く。</span>
+              <span class="lang-en">About once a month.</span>
+            </div>
+          </div>
+          <div class="hobby-item">
+            <div class="hobby-label"><span class="lang-ja">研究</span><span class="lang-en">Research</span></div>
+            <div class="hobby-text">
+              <span class="lang-ja">逆U字のグラフや漸近線のあるグラフが出てくると、それだけでワクワクする。</span>
+              <span class="lang-en">An inverted-U curve or a clean asymptote is enough to make the day better.</span>
+            </div>
+          </div>
+          <div class="hobby-item">
+            <div class="hobby-label"><span class="lang-ja">料理</span><span class="lang-en">Cooking</span></div>
+            <div class="hobby-text">
+              <span class="lang-ja">毎日作っている。いまはイタリアンを勉強中。</span>
+              <span class="lang-en">Cooking every day — currently working through Italian.</span>
+            </div>
+          </div>
         </div>
-        <p class="interest-note">
-          <span class="lang-ja">逆U字のグラフや、漸近線のあるグラフを眺めているときがいちばん落ち着く。</span>
-          <span class="lang-en">Nothing settles the mind quite like an inverted-U curve, or a graph with a clean asymptote.</span>
-        </p>
       </div>
     </div>
   </div>
@@ -1108,6 +1141,51 @@ function toggleRes() {
     b.setAttribute('aria-expanded', String(open));
   } catch(e) { console.error('toggleRes', e); }
 }
+
+/* ── SMOOTH ANCHOR SCROLL ──
+   Eased, distance-aware travel. CSS scroll-behavior was too abrupt on
+   mobile: long jumps arrived instantly and lost the sense of place. */
+(function () {
+  function reduced() {
+    try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+    catch (e) { return false; }
+  }
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+  function scrollToY(destY, duration) {
+    var startY = window.scrollY || window.pageYOffset || 0;
+    var delta  = destY - startY;
+    var t0     = null;
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / duration, 1);
+      window.scrollTo(0, startY + delta * easeInOutCubic(p));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  document.addEventListener('click', function (ev) {
+    try {
+      var a = ev.target && ev.target.closest ? ev.target.closest('a[href^="#"]') : null;
+      if (!a) return;
+      var id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      var el = document.getElementById(id);
+      if (!el) return;
+      ev.preventDefault();
+      var navH = 72;
+      var destY = el.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0) - navH;
+      destY = Math.max(0, destY);
+      if (reduced() || !window.requestAnimationFrame) { window.scrollTo(0, destY); return; }
+      var dist = Math.abs(destY - (window.scrollY || window.pageYOffset || 0));
+      /* ~0.55ms per pixel, held between 500ms and 1200ms */
+      var dur = Math.min(1200, Math.max(500, dist * 0.55));
+      scrollToY(destY, dur);
+      if (history.replaceState) history.replaceState(null, '', '#' + id);
+    } catch (e) { console.error('anchorScroll', e); }
+  }, false);
+}());
 
 /* ── SCROLL ── */
 (function () {
