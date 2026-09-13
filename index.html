@@ -427,9 +427,14 @@ h1, h2, h3 { font-size: inherit; font-weight: inherit; }
 ══════════════════════════════════ */
 .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
 .col-label {
-  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em;
-  color: var(--blue); text-transform: uppercase; margin-bottom: 24px;
-  padding-bottom: 10px; border-bottom: 1px solid var(--ge);
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.22em;
+  color: var(--blue); text-transform: uppercase; margin-bottom: 30px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--gd);
+  position: relative;
+}
+.col-label::after {
+  content: ''; position: absolute; left: 0; bottom: -1px;
+  width: 34px; height: 1px; background: var(--blue);
 }
 .tl-item { display: grid; grid-template-columns: 68px 1fr; gap: 18px; margin-bottom: 20px; }
 .tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--blue); letter-spacing: 0.04em; padding-top: 3px; text-align: right; line-height: 1.5; }
@@ -437,26 +442,26 @@ h1, h2, h3 { font-size: inherit; font-weight: inherit; }
 .tl-content::before { content: ''; position: absolute; left: -4.5px; top: 8px; width: 8px; height: 8px; background: var(--blue); border-radius: 50%; }
 .tl-school { font-family: 'Noto Sans JP', sans-serif; font-size: 16px; color: var(--navy); font-weight: 400; line-height: 1.7; }
 .tl-note { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); font-weight: 300; margin-top: 3px; }
-.interests h3 { font-family: 'Noto Serif JP', serif; font-size: 15px; color: var(--navy); margin-bottom: 12px; margin-top: 20px; font-weight: 400; }
+.interests h3 { font-family: 'Noto Serif JP', serif; font-size: 14px; color: var(--navy); margin-bottom: 13px; margin-top: 34px; font-weight: 500; letter-spacing: 0.05em; }
 .interests h3:first-of-type { margin-top: 0; }
-.tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
-.skills { margin-top: 40px; }
-.skills h3 { font-family: 'Noto Serif JP', serif; font-size: 15px; color: var(--navy); margin-bottom: 12px; margin-top: 20px; font-weight: 400; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+.skills { margin-top: 58px; }
+.skills h3 { font-family: 'Noto Serif JP', serif; font-size: 14px; color: var(--navy); margin-bottom: 13px; margin-top: 34px; font-weight: 500; letter-spacing: 0.05em; }
 .skills h3:first-of-type { margin-top: 0; }
-.skill-note { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); font-weight: 300; line-height: 1.85; margin-top: -8px; margin-bottom: 18px; }
+.skill-note { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); font-weight: 300; line-height: 1.85; margin-top: 9px; margin-bottom: 0; }
 .hobby-list { margin-top: 2px; }
 .hobby-item {
-  display: grid; grid-template-columns: 72px 1fr; gap: 14px;
-  padding: 11px 0; border-bottom: 1px solid var(--ge);
+  display: grid; grid-template-columns: 72px 1fr; gap: 16px;
+  padding: 0 0 15px;
 }
-.hobby-item:last-child { border-bottom: none; }
+.hobby-item:last-child { padding-bottom: 0; }
 .hobby-label { font-family: 'Noto Serif JP', serif; font-size: 14px; color: var(--navy); font-weight: 400; }
 .hobby-text  { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); font-weight: 300; line-height: 1.85; }
 body.en .hobby-item  { grid-template-columns: 92px 1fr; }
 body.en .hobby-label { font-family: 'Cormorant Garamond', serif; font-size: 17px; }
 body.en .hobby-text  { font-family: 'Georgia', serif; }
-.interest-note { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); font-weight: 300; line-height: 1.9; margin-top: -6px; }
-.tag { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; padding: 5px 13px; border: 1px solid var(--ge); color: var(--g4); font-weight: 300; border-radius: 2px; transition: border-color 0.2s, color 0.2s; cursor: default; }
+.interest-note { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--g6); font-weight: 300; line-height: 1.9; margin-top: 0; }
+.tag { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; padding: 5px 12px; border: 1px solid var(--ge); color: var(--g4); font-weight: 300; border-radius: 2px; transition: border-color 0.2s, color 0.2s; cursor: default; }
 .tag:hover { border-color: var(--blue); color: var(--blue); }
 
 /* ══════════════════════════════════
@@ -982,7 +987,7 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
           </div>
         </div>
         <div class="skills">
-          <div class="col-label"><span class="lang-ja">スキル・関心領域</span><span class="lang-en">Skills &amp; Interests</span></div>
+          <div class="col-label"><span class="lang-ja">専門性</span><span class="lang-en">Expertise</span></div>
           <h3><span class="lang-ja">統計解析</span><span class="lang-en">Statistical Analysis</span></h3>
           <div class="tags">
             <span class="tag">R</span>
@@ -1001,7 +1006,7 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
             <span class="lang-ja">AIを活用した開発により、設計から実装・公開までを一人で完結。</span>
             <span class="lang-en">Building with AI-assisted development — handling design, implementation, and release end to end.</span>
           </p>
-          <h3><span class="lang-ja">興味・関心領域</span><span class="lang-en">Areas of Interest</span></h3>
+          <h3><span class="lang-ja">学問的関心</span><span class="lang-en">Academic Interests</span></h3>
           <div class="tags" style="margin-bottom:0;">
             <span class="tag lang-ja">会計学</span><span class="tag lang-en">Accounting</span>
             <span class="tag lang-ja">管理会計</span><span class="tag lang-en">Management Accounting</span>
@@ -1015,15 +1020,15 @@ footer a:focus-visible { outline-color: var(--blue-lt); }
       </div>
 
       <div class="interests reveal">
-        <div class="col-label"><span class="lang-ja">現在、そしてこれから</span><span class="lang-en">Now &amp; Next</span></div>
-        <h3><span class="lang-ja">現在取り組んでいること</span><span class="lang-en">Currently</span></h3>
+        <div class="col-label"><span class="lang-ja">現在地</span><span class="lang-en">Where I Am Now</span></div>
+        <h3><span class="lang-ja">取り組んでいること</span><span class="lang-en">Currently</span></h3>
         <div class="tags">
           <span class="tag lang-ja">公認会計士試験</span><span class="tag lang-en">CPA Exam</span>
           <span class="tag lang-ja">USCPA試験</span><span class="tag lang-en">USCPA Exam</span>
           <span class="tag lang-ja">因果推論（DID）</span><span class="tag lang-en">Causal Inference (DID)</span>
           <span class="tag lang-ja">機械学習（ランダムフォレスト）</span><span class="tag lang-en">Machine Learning (Random Forest)</span>
         </div>
-        <h3><span class="lang-ja">今後の関心領域</span><span class="lang-en">Looking Ahead</span></h3>
+        <h3><span class="lang-ja">これから</span><span class="lang-en">Looking Ahead</span></h3>
         <p class="interest-note">
           <span class="lang-ja">企業価値評価や経営管理など、会計の専門性とデータ分析の双方が求められる領域に関心がある。数字の背後にある構造を読み解き、意思決定の精度を高める仕事に携わりたい。</span>
           <span class="lang-en">Drawn to areas where accounting expertise and data analysis are both essential — such as corporate valuation and management control. Interested in work that reads the structure behind the numbers and sharpens the quality of decisions.</span>
